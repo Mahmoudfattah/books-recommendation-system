@@ -82,16 +82,23 @@
   import React, { useEffect, useState } from 'react'
 import CaterorySlider from '../../images/CaterorySlider'
 import ForgotPassword from '../ForgotPassword'
+import Category from '../../images/Category'
+import axios from 'axios'
+import FeaturedBooks from '../FeaturedBooks'
 
 export default function Home() {
+  
   
   return (
     <>
    
   < CaterorySlider/>
-
-
+  <FeaturedBooks></FeaturedBooks>
+  <Category/>
+ 
     </>
 
   )
 }
+
+

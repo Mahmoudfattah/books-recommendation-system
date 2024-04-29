@@ -89,6 +89,99 @@
   pointer-events: none; /* Prevent text from blocking interaction with images */
 }
 
+/* Add spacing between images */
+.field--item {
+  margin-bottom: 20px;
+}
+
+/* Add slight shadow effect to images */
+.img-responsive {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Center text within each image */
+.form-group {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff; /* Text color */
+  font-size: 24px; /* Adjust font size as needed */
+  font-weight: bold; /* Bold font weight */
+}
+/* Add space between images */
+.field--item {
+  margin-bottom: 20px; /* Adjust this value as needed */
+}
+
+/* Center the text vertically above each image */
+.field--item .field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Center the text horizontally */
+.field--item .field .form-group {
+  text-align: center;
+}
+.label-small {
+  font-size: 14px; /* Adjust the font size as needed */
+}
+
+
+.position-relative {
+  position: relative;
+}
+.photos{
+  position: relative;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  height: 100%;
+  display: flex;
+  /* width: 100% ; */
+  align-items: center;
+  transform: translate(-50%, -50%); /* Center the text precisely */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  color: white;
+  /* padding: 10px; */
+}
+
+.text-on-image {
+  background-color: gray;
+  width: 100%;
+}
+.btn-custom {
+  background-color: #0094bd;
+}
+
+
+.form-btn{
+  background-color: rgba(9,116,115,1);
+  color: #fff;
+}
+.whiteText {
+  color: white;
+}
+
+
+/* .nav-itam{
+  
+  color: #fff;
+} */
+
+/* .btn-custom{
+
+  background-color: #0094bd;
+} */
+/* 
+.btn{
+  color: #0094bd;
+} */
 
 
 

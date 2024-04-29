@@ -234,31 +234,51 @@ import * as Yup from 'yup';
 import { UserTokenContext } from '../../Context/UserTokenContext';
 
 export default function LogIn({ fixed }) {
-  let { islogin, setLogin } = useContext(UserTokenContext);
+  let [error, setError] = useState('');
   let navigate = useNavigate();
-
   let [loading, setLoading] = useState(false);
-  let [error, setError] = useState(false);
+
+
+
+  // async function submitForm(values) {
+  //   setLoading(true);
+  //   let { data } = await axios.post(`http://localhost:3000/api/v1/auth/signIn`, values).catch((err) => {
+  //     setError(err.response.data.message);
+  //     setLoading(false);
+  //   });
+
+  //   if (data.message === 'success') {
+  //     setError('');
+  //     setLoading(false);
+  //     localStorage.setItem('userToken', data.token);
+  //     setLogin(data.token);
+  //     navigate('/Home');
+  //   }
+  // }
 
   async function submitForm(values) {
     setLoading(true);
-    let { data } = await axios.post(`http://localhost:3000/api/v1/auth/signIn`, values).catch((err) => {
-      setError(err.response.data.message);
+    try {
+      const response = await axios.post(`https://bookify-new.onrender.com/api/v1/auth/signIn`, values);
+      if (response.data.message === 'signIp successfully' && response.data.token) {
+     
+        localStorage.setItem('token', response.data.token);
+        setError('');
+        setLoading(false);
+        navigate('/Home');
+      } else {
+        setError('Failed to sign ip. Please try again.');
+        setLoading(false);
+      }
+    } catch (error) {
+      setError(error.response?.data?.message || 'Failed to sign ip. Please try again.');
       setLoading(false);
-    });
-
-    if (data.message === 'success') {
-      setError('');
-      setLoading(false);
-      localStorage.setItem('userToken', data.token);
-      setLogin(data.token);
-      navigate('/cart');
     }
   }
 
   const validationSchema = Yup.object({
-    email: Yup.string().email('email not vaild').required('email is required'),
-    password: Yup.string().matches(/[A-Z][a-z0-9]{5}$/, 'not valid').required('password is required'),
+    email: Yup.string().email('Invalid email format').required('Email is required'),
+    password: Yup.string().matches(/^[A-Za-z0-9@#$%^&*!]{8,}$/, 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character').required('Password is required'),
   });
 
   let formik = useFormik({
@@ -317,7 +337,7 @@ export default function LogIn({ fixed }) {
             <RotatingLines strokeColor="white" strokeWidth="5" animationDuration="0.75" width="60" visible={true} />
           </button>
         ) : (
-          <button disabled={!(formik.isValid && formik.dirty)} className="btn btn-success ms-auto d-block mt-3" type="submit">
+          <button  disabled={!(formik.isValid && formik.dirty)} className="btn form-btn ms-auto d-block " type="submit">
             Login
           </button>
         )}
@@ -325,3 +345,5 @@ export default function LogIn({ fixed }) {
     </div>
   );
 }
+
+
