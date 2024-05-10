@@ -85,6 +85,7 @@ import ForgotPassword from '../ForgotPassword'
 import Category from '../../images/Category'
 import axios from 'axios'
 import FeaturedBooks from '../FeaturedBooks'
+import FeaturedBooks2 from '../FeatureBooks2'
 
 export default function Home() {
   
@@ -95,6 +96,7 @@ export default function Home() {
   < CaterorySlider/>
   <FeaturedBooks></FeaturedBooks>
   <Category/>
+  <FeaturedBooks2></FeaturedBooks2>
  
     </>
 

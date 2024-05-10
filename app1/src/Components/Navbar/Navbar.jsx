@@ -1,4 +1,4 @@
-//  
+ 
 
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,11 +6,22 @@ import logo from '../../assets/logo.svg';
 import { UserTokenContext } from '../../Context/UserTokenContext';
 import axios from 'axios';
 
-export default function Navbar() {
+export default function Navbar({test}) {
     const { isLogin, setLogin } = useContext(UserTokenContext);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]); // Define searchResults state
     const navigate = useNavigate();
+  
+
+
+
+    function SignOut()
+    {
+      localStorage.removeItem('token')
+      setLogin(false)
+      navigate('/LogIn')
+    }
+
 
     const handleSearch = async (e) => {
       e.preventDefault();
@@ -31,6 +42,34 @@ export default function Navbar() {
       }
   };
   
+// import React, { useContext, useState } from 'react';
+// import { Link, useNavigate } from 'react-router-dom';
+// import logo from '../../assets/logo.svg';
+// import { UserTokenContext } from '../../Context/UserTokenContext';
+// import axios from 'axios';
+
+// export default function Navbar() {
+//     const { isLogin, setLogin } = useContext(UserTokenContext);
+//     const [searchQuery, setSearchQuery] = useState('');
+//     const [searchResults, setSearchResults] = useState([]);
+//     const [searchMessage, setSearchMessage] = useState(''); // State for search message
+//     const navigate = useNavigate();
+
+//     const handleSearch = async (e) => {
+//         e.preventDefault();
+//         try {
+//             const response = await axios.get(`https://bookify-new.onrender.com/api/v1/book?keyword=${searchQuery}`);
+//             const books = response.data.book;
+//             const matchingBook = books.find(book => book.title.toLowerCase() === searchQuery.toLowerCase());
+//             if (matchingBook) {
+//                 navigate(`/book/${matchingBook.slug}`);
+//             } else {
+//                 setSearchMessage('No matching book found'); // Update search message state
+//             }
+//         } catch (error) {
+//             console.error('Error searching books:', error);
+//         }
+//     };
 
     return (
         <nav className="navbar navbar-expand-lg blueNavbar">
@@ -38,6 +77,8 @@ export default function Navbar() {
                 <Link className="navbar-brand" to="/">
                     <img src={logo} alt="logo" />
                 </Link>
+
+                
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -82,10 +123,10 @@ export default function Navbar() {
               <li><a className="dropdown-item" href="#">Young Adult </a></li>
               <li><hr className="dropdown-divider" /></li>
               <h3 className=" d-flex justify-content-between w-75 mx-auto  h3 ">Resources</h3>
-              <li><a className="dropdown-item blackText" href="#">Authors</a></li>
+            <Link to='/Authors'><a className="dropdown-item blackText" href="#">Authors</a></Link>
               <li><a className="dropdown-item blackText" href="#">Languages</a></li>
               <li><a className="dropdown-item blackText" href="#">Genres</a></li>
-              <li><a className="dropdown-item blackText" href="#">Articles</a></li>
+              <Link to='/profilePage'><a className="dropdown-item blackText" href="#">Profile</a></Link>
               <li><a className="dropdown-item blackText" href="#">Author Interviews</a></li>
               <li><a className="dropdown-item blackText" href="#">Discuss</a></li>
                             </ul>
@@ -102,6 +143,24 @@ export default function Navbar() {
                         />
                         <button className="btn original-button" type="submit">Search</button>
                     </form>
+
+                     {/* <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form className="d-flex" onSubmit={handleSearch}>
+                        <input
+                            className="form-control me-2"
+                            type="search"
+                            placeholder="Search by title, author or keywords"
+                            aria-label="Search"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            style={{ borderColor: searchMessage ? 'red' : '' }} // Add red border if search message exists
+                        />
+                        <button className="btn original-button" type="submit">Search</button>
+                    </form>
+                    {searchMessage && (
+                        <span style={{ color: 'red' }}>{searchMessage}</span>
+                    )}
+                </div> */}
                     <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
                         {searchResults.map(book => ( // Render search results
                             <li key={book._id} className="nav-item">
@@ -114,13 +173,22 @@ export default function Navbar() {
               <a href=""><i className='fa-brands fa-google mx-2'></i></a>
               <a href=""><i className='fa-brands fa-youtube mx-2'></i></a>
             </li>
-            <li className="nav-item">
+            
+            {
+              isLogin ? <li className="nav-item">
+                <span className="nav-link cursor-pointer" onClick={SignOut}>SignOut</span>
+              </li> :
+                <>
+                  <li className="nav-item">
                     <Link className="nav-link" to='/Register'>Register</Link>
                   </li>
 
                   <li className="nav-item">
-                    <Link className="nav-link" to='/logIn'>Login</Link>
+                    <Link className="nav-link" to='/LogIn'>Login</Link>
                   </li>
+                </>
+            }
+
                     </ul>
                 </div>
             </div>

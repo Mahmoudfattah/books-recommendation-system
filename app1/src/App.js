@@ -60,6 +60,17 @@ import Layout from './Components/Layout';
 import ForgotPassword from './Components/ForgotPassword';
 import Books from './Components/books';
 import AllGenre from './Components/Genre/AllGenre';
+import Romance from './Components/Genre/Romance';
+import Comment from './Components/Comment';
+import ProfilePage from './Components/ProfilePage';
+import ResetPassword from './Components/ResetPassword';
+import Authors from'./Components/Authors';
+import Author from './Components/Author';
+import Genre from './Components/Genre';
+import Action from './Components/Action';
+import Mystery from './Components/Mystery';
+import History from './Components/History';
+
 export default function App() {
 
   let { setLogin } = useContext(UserTokenContext)
@@ -67,8 +78,8 @@ export default function App() {
 
 
   useEffect(() => {
-    if (localStorage.getItem('userToken'))
-      setLogin(localStorage.getItem('userToken'))
+    if (localStorage.getItem('token'))
+      setLogin(localStorage.getItem('token'))
   }, [])
 
   const routes = createBrowserRouter([
@@ -80,7 +91,18 @@ export default function App() {
         { path: 'register', element: <Register></Register> },
         { path: 'ForgotPassword', element: < ForgotPassword></ForgotPassword> },
         { path: 'books/:id', element: < Books></Books> },
+        { path: 'History', element: < History></History> },
+        { path: 'Mystery', element: < Mystery></Mystery> },
+        { path: 'Action', element: < Action></Action> },
+         { path: 'Genre/:id', element: < Genre></Genre> },
         { path: 'AllGenre', element: < AllGenre></AllGenre> },
+        {path :'Romance', element:<Romance></Romance> },
+        {path :'Comment', element:<Comment></Comment> },
+        {path :'ResetPassword', element:<ResetPassword></ResetPassword> },
+        {path: 'Authors', element:<Authors></Authors>},
+        {path: 'Author/:id', element:<Author></Author>},
+       
+        {path :'ProfilePage', element:<ProfilePage></ProfilePage> },
         //  {path:'Reviews',element:<Reviews></Reviews>},
         { path: '*', element: <NotFound></NotFound> },
       ]

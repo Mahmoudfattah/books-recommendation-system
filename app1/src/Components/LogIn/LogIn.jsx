@@ -146,7 +146,7 @@
 //    async function submitForm(values)
 //    {
 //     setLoading(true)
-//     let { data } = await axios.post(`http://localhost:3000/api/v1/auth/signIn`, values).catch((err) => {
+//     let { data } = await axios.post(http://localhost:3000/api/v1/auth/signIn, values).catch((err) => {
 //       setError(err.response.data.message)
 //       setLoading(false)
 //     }
@@ -223,58 +223,58 @@
 //       </form>
 //     </div>
 //   )
-// }
-
-import axios from 'axios';
+// }import axios from 'axios';
 import { useFormik } from 'formik';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { UserTokenContext } from '../../Context/UserTokenContext';
+import axios from 'axios';
 
 export default function LogIn({ fixed }) {
   let [error, setError] = useState('');
   let navigate = useNavigate();
   let [loading, setLoading] = useState(false);
 
-
-
   // async function submitForm(values) {
   //   setLoading(true);
-  //   let { data } = await axios.post(`http://localhost:3000/api/v1/auth/signIn`, values).catch((err) => {
-  //     setError(err.response.data.message);
+  //   try {
+  //     const response = await axios.post('https://bookify-new.onrender.com/api/v1/auth/signIn', values);
+  //     if (response.data.message === 'login Successfully' && response.data.token) {
+  //       // Use navigate with state to pass the token to ProfilePage or home page 
+  //       localStorage.setItem('token', response.data.token);
+  //       navigate('/');
+  //     } else {
+  //       setError('Failed to sign in. Please try again with another email.');
+  //       setLoading(false);
+  //     }
+  //   } catch (error) {
+  //     setError(error.response?.data?.message || 'Failed to sign in. Please try again.');
   //     setLoading(false);
-  //   });
-
-  //   if (data.message === 'success') {
-  //     setError('');
-  //     setLoading(false);
-  //     localStorage.setItem('userToken', data.token);
-  //     setLogin(data.token);
-  //     navigate('/Home');
   //   }
   // }
+
+
 
   async function submitForm(values) {
     setLoading(true);
     try {
-      const response = await axios.post(`https://bookify-new.onrender.com/api/v1/auth/signIn`, values);
-      if (response.data.message === 'signIp successfully' && response.data.token) {
-     
-        localStorage.setItem('token', response.data.token);
-        setError('');
-        setLoading(false);
-        navigate('/Home');
+      const response = await axios.post('https://bookify-new.onrender.com/api/v1/auth/signIn', values);
+      if (response.data.message === 'login Successfully' && response.data.token) {
+        const { token, role } = response.data; // Extract token and role from the response
+        localStorage.setItem('token', token);
+        localStorage.setItem('role', role); // Store the role in local storage
+        navigate('/');
       } else {
-        setError('Failed to sign ip. Please try again.');
+        setError('Failed to sign in. Please try again with another email.');
         setLoading(false);
       }
     } catch (error) {
-      setError(error.response?.data?.message || 'Failed to sign ip. Please try again.');
+      setError(error.response?.data?.message || 'Failed to sign in. Please try again.');
       setLoading(false);
     }
   }
+  
 
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email format').required('Email is required'),
@@ -296,7 +296,7 @@ export default function LogIn({ fixed }) {
         <h2 className="my-3">Login Now:</h2>
         {error ? <p className="alert alert-danger">{error}</p> : ''}
 
-        <label htmlFor="email">email:</label>
+        <label htmlFor="email">Email:</label>
         <input
           type="email"
           id="email"
@@ -308,7 +308,7 @@ export default function LogIn({ fixed }) {
         />
         {formik.errors.email && formik.touched.email ? <p className="alert alert-danger">{formik.errors.email}</p> : ''}
 
-        <label htmlFor="password">password:</label>
+        <label htmlFor="password">Password:</label>
         <input
           type="password"
           id="password"
@@ -329,15 +329,12 @@ export default function LogIn({ fixed }) {
           Forgot Password?
         </Link>
 
-
-       
-  
         {loading ? (
           <button className="btn btn-success ms-auto d-block mt-3">
             <RotatingLines strokeColor="white" strokeWidth="5" animationDuration="0.75" width="60" visible={true} />
           </button>
         ) : (
-          <button  disabled={!(formik.isValid && formik.dirty)} className="btn form-btn ms-auto d-block " type="submit">
+          <button disabled={!(formik.isValid && formik.dirty)} className="btn form-btn ms-auto d-block" type="submit">
             Login
           </button>
         )}
@@ -345,5 +342,3 @@ export default function LogIn({ fixed }) {
     </div>
   );
 }
-
-

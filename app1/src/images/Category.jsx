@@ -1,36 +1,17 @@
 import React from 'react';
-import image1 from '../assets/images/genre-1.png';
-import image2 from '../assets/images/genre-2.png';
-import image3 from '../assets/images/genre-3.png';
-import image4 from '../assets/images/genre-4.png';
-import image5 from '../assets/images/genre-5.png';
-import image6 from '../assets/images/genre-6.png';
-import image7 from '../assets/images/genre-7.png';
-import image8 from '../assets/images/genre-8.png';
-import image9 from '../assets/images/genre-9.png';
-import image10 from '../assets/images/genre-10.png';
-import image11 from '../assets/images/genre-11.png';
-import image12 from '../assets/images/genre-12.png';
-
-
-
-
-
-
 import { Link } from 'react-router-dom';
-
-
-// Import other images here
+import image1 from '../assets/images/1.jpg';
+import image2 from '../assets/images/2.jpg';
+import image3 from '../assets/images/3.jpg';
+import image4 from '../assets/images/4.jpg';
 
 const Category = () => {
-  // Define an array of objects containing image paths and genre names
+  // Define an array of objects containing image paths and corresponding page paths
   const genres = [
-    { image: image1, name: 'ROMANCE' },
-    { image: image2, name: 'ACTION' },
-    { image: image3, name: 'ADVENTURE' },
-    { image: image3, name: 'ADVENTURE' },
-    
-    // Add other genres here
+    { image: image1, path: '/Romance' }, // Define path for the first image
+    { image: image2, path: '/Action' }, // Define path for the second image
+    { image: image3, path: '/Mystery' }, // Define path for the third image
+    { image: image4, path: '/History' }, // Define path for the fourth image
   ];
 
   return (
@@ -44,12 +25,9 @@ const Category = () => {
         {genres.map((genre, index) => (
           <div key={index} className="col-lg-3 col-md-6 col-sm-12 p-2">
             <div className="photos">
-              <a href={`/search-book?field_genre%5B${index}%5D=${index}`}>
+              <Link to={genre.path}>
                 <img loading="lazy" src={genre.image} width="250" alt="" className="img-responsive" />
-              </a>
-              <div className="overlay-text">
-                <p className="text-on-image">{genre.name}</p>
-              </div>
+              </Link>
             </div>
           </div>
         ))}

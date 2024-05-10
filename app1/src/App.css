@@ -146,7 +146,7 @@
   /* width: 100% ; */
   align-items: center;
   transform: translate(-50%, -50%); /* Center the text precisely */
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  background-color: white; /* Semi-transparent black background */
   color: white;
   /* padding: 10px; */
 }
@@ -167,6 +167,142 @@
 .whiteText {
   color: white;
 }
+.card {
+  height: 100%;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px; /* Adjust the height as needed */
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 1rem;
+}
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 4; /* Number of lines to show */
+}
+
+/* .card-text2 {
+  font-size: 1rem;
+}
+.line-clamp-7 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 5; 
+} */
+
+
+
+
+
+
+
+
+
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  color-scheme: light dark;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px; /* Adjust the height as needed */
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+  color: light-dark(#333b3c, #efefec);
+  background-color: light-dark(#efedea, #1e323f);
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.bg-main2{
+  background-color: rgb(19, 185, 183);
+  color: #fff; 
+}
+.profile-card{
+  background-color: rgb(19, 75, 85);
+  color: #efedea;
+}
+
+
+.profile-card-body{
+
+  padding: 15px;
+  color:  #070700;
+  background-color:  #237483;
+}
+.profile-card1{
+  background-color: rgb(19, 75, 85);
+  color: #efedea;
+}
+
+
+.profile-card-body1{
+
+  padding: 15px;
+  color:  #000000;
+  background-color:  #cacaca65;
+}
+
+.profile-card2{
+  background-color: rgb(19, 75, 85);
+  color: #efedea;
+}
+
+
+.profile-card-body2{
+
+  padding: 15px;
+  color:  #ffffff;
+  background-color:  #887a7a65;
+}
+
+.card-body6{
+
+  padding: 15px;
+  color:  #070700;
+  background-color:  #07c1e2;
+}
+
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #f6d365;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+}
+
 
 
 /* .nav-itam{
