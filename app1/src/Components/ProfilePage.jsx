@@ -153,12 +153,12 @@ export default function ProfilePage() {
         formData,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            token,
           },
         }
       );
       console.log('Image added successfully:', response.data);
-      setUser({ ...user, userImage: response.data.imageUrl });
+      setUser({ ...user, userImage: response.data.userImage.image }); // Update to response.data.userImage.image
     } catch (error) {
       console.error('Error uploading image:', error);
     } finally {
@@ -166,101 +166,87 @@ export default function ProfilePage() {
     }
   };
 
-
   const handleDeleteImage = async () => {
     setLoading(true);
     try {
-      const response = await axios.patch('https://bookify-new.onrender.com/api/v1/userImage/deleteImage', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const token = localStorage.getItem('token');
+      const response = await axios.patch(
+        'https://bookify-new.onrender.com/api/v1/userImage/deleteImage',
+        null,
+        {
+          headers: {
+            token,
+          },
+        }
+      );
       console.log('Image deleted successfully:', response.data);
+      setUser({ ...user, userImage: null }); // Update to remove the user image
     } catch (error) {
       console.error('Error deleting image:', error);
     } finally {
       setLoading(false);
     }
   };
+
   return (
-    // <section style={{ backgroundColor: '#eee' }}>
-  <div className="container py-5">
-    <div className="row">
-      <div className="col-lg-4">
-        <div className="profile-card mb-4">
-          <div className="profile-card-body text-center">
-            <img
-              src={user.userImage || "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"}
-              alt="avatar"
-              className="rounded-circle"
-              style={{ width: '150px' }}
-            />
-
-            <p className="text-white mb-1">Front End Developer</p>
-            <p className="text-white mb-4">any massage </p>
-            <div className="d-flex justify-content-center mb-2">
-              {/* <button className="btn btn-primary me-1">Follow</button>
-                  <button className="btn btn-outline-primary">Message</button> */}
+    <div className="container py-5">
+      <div className="row">
+        <div className="col-lg-4">
+          <div className="profile-card mb-4">
+            <div className="profile-card-body text-center">
+              <img
+                src={user.userImage || "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"}
+                alt="avatar"
+                className="rounded-circle"
+                style={{ width: '200px' }}
+              />
+              <p className="text-white mb-1">Front End Developer</p>
+              <p className="text-white mb-4">any massage </p>
+              <div className="d-flex justify-content-center mb-2"></div>
             </div>
           </div>
         </div>
 
-        <div className="profile-card">
-          <div className="profile-card-body p-0">
-            <ul className="list-group list-group-flush rounded-0 ">
-              <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                <i className="fas fa-globe fa-lg text-warning"></i>
-                <span>https://ManyBooks.com</span>
-              </li>
-              {/* Add other list items here */}
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div className="col-lg-8">
-        <div className="profile-card1 mb-4">
-          <div className="profile-card-body1">
-            <div className="row mb-3">
-              <div className="col-sm-3">
-                <p className="mb-0">Full Name</p>
-              </div>
-              <div className="col-sm-9">
-                <p className="text-muted">{user.name}</p>
+        <div className="col-lg-8">
+          <div className="profile-card1 mb-4">
+            <div className="profile-card-body1">
+              <div className="row mb-3">
+                <div className="col-sm-3">
+                  <p className="mb-0">Full Name</p>
+                </div>
+                <div className="col-sm-9">
+                  <p className="text-muted">{user.name}</p>
+                </div>
               </div>
             </div>
-            {/* Add other profile information rows here */}
           </div>
-        </div>
 
-        <div className="profile-card2 mb-4">
-          <div className="profile-card-body2">
-            <div className="row mb-3">
-              <div className="col-sm-3">
-                <p className="mb-0">Profile Image</p>
+          <div className="profile-card2 mb-4">
+            <div className="profile-card-body2">
+              <div className="row mb-3">
+                <div className="col-sm-3">
+                  <p className="mb-0">Profile Image</p>
+                </div>
+                <div className="col-sm-9">
+                  <input type="file" onChange={handleImageChange} />
+                </div>
               </div>
-              <div className="col-sm-9">
-                <input type="file" onChange={handleImageChange} />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-sm-9 offset-sm-3">
-                <button className="btn btn-primary me-1" onClick={handleUploadImage} disabled={loading}>
-                  {loading ? 'Uploading...' : 'Upload Image'}
-                </button>
-                {user.userImage && (
-                  <button className="btn btn-danger" onClick={handleDeleteImage} disabled={loading}>
-                    {loading ? 'Deleting...' : 'Delete Image'}
+              <div className="row">
+                <div className="col-sm-9 offset-sm-3">
+                  <button className="btn btn-primary me-1" onClick={handleUploadImage} disabled={loading}>
+                    {loading ? 'Uploading...' : 'Upload Image'}
                   </button>
-                )}
+                  {user.userImage && (
+                    <button className="btn btn-danger" onClick={handleDeleteImage} disabled={loading}>
+                      {loading ? 'Deleting...' : 'Delete Image'}
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-
   );
 }

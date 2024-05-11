@@ -97,11 +97,11 @@ export default function App() {
          { path: 'Genre/:id', element: < Genre></Genre> },
         { path: 'AllGenre', element: < AllGenre></AllGenre> },
         {path :'Romance', element:<Romance></Romance> },
-        {path :'Comment', element:<Comment></Comment> },
+        {path :'Comment/:id', element:<Comment></Comment> },
         {path :'ResetPassword', element:<ResetPassword></ResetPassword> },
         {path: 'Authors', element:<Authors></Authors>},
         {path: 'Author/:id', element:<Author></Author>},
-       
+         
         {path :'ProfilePage', element:<ProfilePage></ProfilePage> },
         //  {path:'Reviews',element:<Reviews></Reviews>},
         { path: '*', element: <NotFound></NotFound> },

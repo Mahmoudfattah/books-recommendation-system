@@ -118,14 +118,14 @@ export default function Navbar({test}) {
               <li><a className="dropdown-item" href="#">Literary Fiction </a></li>
               <li><a className="dropdown-item" href="#">Mystery & Thriller </a></li>
               <li><a className="dropdown-item" href="#">Non-Fiction </a></li>
-              <Link className="dropdown-item" to="/genres/romance">Romance</Link>
+              <Link className="dropdown-item" to="/Romance">Romance</Link>
               <li><a className="dropdown-item" href="#">Science Fiction </a></li>
               <li><a className="dropdown-item" href="#">Young Adult </a></li>
               <li><hr className="dropdown-divider" /></li>
               <h3 className=" d-flex justify-content-between w-75 mx-auto  h3 ">Resources</h3>
             <Link to='/Authors'><a className="dropdown-item blackText" href="#">Authors</a></Link>
               <li><a className="dropdown-item blackText" href="#">Languages</a></li>
-              <li><a className="dropdown-item blackText" href="#">Genres</a></li>
+              <Link to='/Category'>   <a className="dropdown-item blackText" href="#">Genres</a></Link>
               <Link to='/profilePage'><a className="dropdown-item blackText" href="#">Profile</a></Link>
               <li><a className="dropdown-item blackText" href="#">Author Interviews</a></li>
               <li><a className="dropdown-item blackText" href="#">Discuss</a></li>

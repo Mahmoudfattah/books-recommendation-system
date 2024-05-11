@@ -261,10 +261,18 @@ export default function LogIn({ fixed }) {
     try {
       const response = await axios.post('https://bookify-new.onrender.com/api/v1/auth/signIn', values);
       if (response.data.message === 'login Successfully' && response.data.token) {
-        const { token, role } = response.data; // Extract token and role from the response
+        const { token, role } = response.data;
         localStorage.setItem('token', token);
-        localStorage.setItem('role', role); // Store the role in local storage
-        navigate('/');
+        localStorage.setItem('role', role);
+  
+        // Check the role and navigate accordingly
+        if (role === 'user') {
+          navigate('/');
+        } else if (role === 'admin') {
+          navigate('/Dashboard');
+        } else {
+          setError('Invalid role. Please contact support.');
+        }
       } else {
         setError('Failed to sign in. Please try again with another email.');
         setLoading(false);
@@ -274,6 +282,7 @@ export default function LogIn({ fixed }) {
       setLoading(false);
     }
   }
+  
   
 
   const validationSchema = Yup.object({

@@ -176,18 +176,18 @@
 // }
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; 
-import { useNavigate, useParams } from 'react-router-dom'; // Import useParams from react-router-dom
+import { useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Books() {
   const [book, setBook] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { id } = useParams(); // Destructure id from useParams
+  const { id } = useParams();
 
   useEffect(() => {
     getBook();
-  }, []);
- // Add navigate to the dependencies array to trigger effect when navigate changes
+  }, [navigate]); // Add navigate to the dependencies array to trigger effect when navigate changes
 
   async function getBook() {
     setLoading(true);
@@ -200,36 +200,42 @@ export default function Books() {
       setLoading(false);
     }
   }
-
-  async function handleUpdateStatus() {
+  
+  async function handleUpdateStatus(status) {
     setLoading(true);
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (!token) {
-        // Handle case where token is not available
-        console.error('Token not found');
+        console.error("Token not found");
         return;
       }
-  
+
       const response = await axios.patch(
-        'https://bookify-new.onrender.com/api/v1/auth/updateStatus',
-        { bookId: id },
+        `https://bookify-new.onrender.com/api/v1/auth/updateStatus/${id}`,
+        { status },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            token: token,
           },
         }
       );
       console.log('Update status response:', response.data);
-      getBook(); // Update book data after status update
-      navigate('/Comment');
+
+      if (status === "read") {
+        // If status is "read", navigate to Comment Page
+        navigate(`/Comment/${id}`);
+      
+    } else if (status === "not_read") {
+      // If status is "not_read", navigate to home page
+      navigate('/');
+    }
+      
     } catch (error) {
       console.error('Error updating status:', error);
     } finally {
       setLoading(false);
     }
   }
-  
 
   return (
     <section style={{ backgroundColor: '#eee' }}>
@@ -265,9 +271,24 @@ export default function Books() {
                     <span>{book.rateCount} <i className='fa-solid fa-star rating-color'></i></span>
                   </div>
                   <div className="d-flex justify-content-start">
-                    <button className='btn bg-main2 form-control text-white me-2'>Not Read</button>
-                    <button className='btn bg-main2 form-control text-white me-2'>Reading</button>
-                    <button className='btn bg-main2 form-control text-white' onClick={handleUpdateStatus}>Read</button>
+                    <button
+                      onClick={() => handleUpdateStatus("not_read")}
+                      className="btn bg-main2 form-control text-white me-2"
+                    >
+                      Not Read
+                    </button>
+                    <button
+                      onClick={() => handleUpdateStatus("reading")}
+                      className="btn bg-main2 form-control text-white me-2"
+                    >
+                      Reading
+                    </button>
+                    <button
+                      onClick={() => handleUpdateStatus("read")}
+                      className="btn bg-main2 form-control text-white me-2"
+                    >
+                      Read
+                    </button>
                   </div>
                 </div>
               </div>
