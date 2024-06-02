@@ -148,6 +148,16 @@ export default function Navbar({ test }) {
                     Profile
                   </a>
                 </Link>
+                <Link to="/Wishlist">
+                  <a className="dropdown-item blackText" href="#">
+                    Wish list
+                  </a>
+                </Link>
+                <Link to="/LanguageList">
+                  <a className="dropdown-item blackText" href="#">
+                    Language list
+                  </a>
+                </Link>
                 {/* <li><a className="dropdown-item blackText" href="#">Author Interviews</a></li>
               <li><a className="dropdown-item blackText" href="#">Discuss</a></li> */}
               </ul>
