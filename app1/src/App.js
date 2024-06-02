@@ -70,6 +70,11 @@ import Genre from './Components/Genre';
 import Action from './Components/Action';
 import Mystery from './Components/Mystery';
 import History from './Components/History';
+import AddToWishlist from './Components/Addwishlist';
+//import RemoveFromWishlist from './Components/RemoveFromWishlist'
+import LanguageList from './Components/GetAllLanguages'
+import Wishlist from './Components/WishlistUser'
+import BookByLang from './Components/book-by-lang/BookByLang';
 
 export default function App() {
 
@@ -101,6 +106,12 @@ export default function App() {
         {path :'ResetPassword', element:<ResetPassword></ResetPassword> },
         {path: 'Authors', element:<Authors></Authors>},
         {path: 'Author/:id', element:<Author></Author>},
+        {path: 'AddToWishlist', element:<AddToWishlist></AddToWishlist>},
+        //{path: 'RemoveFromWishlist', element:<RemoveFromWishlist></RemoveFromWishlist>},
+        {path: 'LanguageList', element:<LanguageList></LanguageList>},
+        {path: 'Wishlist', element:<Wishlist></Wishlist>},
+        {path: 'book-by-lang/:id', element:<BookByLang></BookByLang>},
+        
          
         {path :'ProfilePage', element:<ProfilePage></ProfilePage> },
         //  {path:'Reviews',element:<Reviews></Reviews>},

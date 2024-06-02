@@ -124,7 +124,9 @@ export default function Navbar({test}) {
               <li><hr className="dropdown-divider" /></li>
               <h3 className=" d-flex justify-content-between w-75 mx-auto  h3 ">Resources</h3>
             <Link to='/Authors'><a className="dropdown-item blackText" href="#">Authors</a></Link>
-              <li><a className="dropdown-item blackText" href="#">Languages</a></li>
+            <Link to='/LanguageList'><a className="dropdown-item blackText" href="#">Languages</a></Link>
+            <Link to="/wishlist"><a className="dropdown-item blackText" href="#">Wishlist</a></Link>
+              
               <Link to='/Category'>   <a className="dropdown-item blackText" href="#">Genres</a></Link>
               <Link to='/profilePage'><a className="dropdown-item blackText" href="#">Profile</a></Link>
               <li><a className="dropdown-item blackText" href="#">Author Interviews</a></li>
