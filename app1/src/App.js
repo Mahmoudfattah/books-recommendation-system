@@ -99,7 +99,7 @@ export default function App() {
         { path: 'History', element: < History></History> },
         { path: 'Mystery', element: < Mystery></Mystery> },
         { path: 'Action', element: < Action></Action> },
-         { path: 'Genre/:id', element: < Genre></Genre> },
+         { path: 'Genre/:genreId', element: < Genre></Genre> },
         { path: 'AllGenre', element: < AllGenre></AllGenre> },
         {path :'Romance', element:<Romance></Romance> },
         {path :'Comment/:id', element:<Comment></Comment> },

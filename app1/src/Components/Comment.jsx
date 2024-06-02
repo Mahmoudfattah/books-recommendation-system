@@ -1,137 +1,345 @@
-// import React, { useState, useEffect } from 'react';
+// import React, { useState } from 'react';
 // import axios from 'axios';
+// import { useParams } from 'react-router-dom';
 
-// function Comment() {
-//   // State to manage the list of comments and the input for adding a new comment
-//   const [comments, setComments] = useState([]);
-//   const [newComment, setNewComment] = useState('');
-//   const [userName, setUserName] = useState(''); // Assuming you have a way to get the user's name
+// export default function Comment() {
+//   const [reviewText, setReviewText] = useState('');
+//   const [rating, setRating] = useState(0);
+//   const [submittedReview, setSubmittedReview] = useState(null);
+//   const [errorMessage, setErrorMessage] = useState('');
+//   const { id } = useParams(); // Get id from URL
 
-//   // Function to fetch comments from the API
-//   useEffect(() => {
-//     async function fetchComments() {
-//       try {
-//         const response = await axios.get('https://bookify-new.onrender.com/api/v1/review');
-//         setComments(response.data);
-//       } catch (error) {
-//         console.error('Error fetching comments:', error);
+//   const handleSubmit = async () => {
+//     try {
+//       const token = localStorage.getItem("token");
+//       if (!token) {
+//         console.error("Token not found");
+//         return;
+//       }
+
+//       const response = await axios.post(
+//         `https://bookify-new.onrender.com/api/v1/review`,
+//         {
+//           text: reviewText,
+//           book: id,
+//           rate: rating,
+//         },
+//         {
+//           headers: {
+//             token: token,
+//           },
+//         }
+//       );
+//       setSubmittedReview(response.data.review);
+//       setErrorMessage(''); // Clear error message if review is successfully submitted
+//     } catch (error) {
+//       console.error('Error adding review:', error);
+//       if (error.response && error.response.data && error.response.data.error) {
+//         setErrorMessage(error.response.data.error);
+//       } else {
+//         setErrorMessage('An unexpected error occurred.');
 //       }
 //     }
-
-//     fetchComments();
-//   }, []);
-
-//   // Function to handle adding a new comment
-//   async function handleAddComment() {
-//     try {
-//       const response = await axios.post('https://bookify-new.onrender.com/api/v1/review', {
-//         userName: userName, // Assuming you have a way to get the user's name
-//         comment: newComment
-//       });
-
-//       // Add the new comment to the list of comments
-//       setComments([...comments, response.data]);
-
-//       // Clear the input field after adding the comment
-//       setNewComment('');
-//     } catch (error) {
-//       console.error('Error adding comment:', error);
-//     }
-//   }
+//   };
 
 //   return (
-//     <div>
-//       <h1>Comments</h1>
-//       <div>
-//         {/* Input field to add a new comment */}
-//         <input
-//           type="text"
-//           value={newComment}
-//           onChange={(e) => setNewComment(e.target.value)}
-//           placeholder="Add a comment..."
-//         />
-//         <button onClick={handleAddComment}>Add Comment</button>
-//       </div>
-//       <div>
-//         {/* Display the list of comments */}
-//         {comments.map((comment, index) => (
-//           <div key={index}>
-//             <p>User: {comment.userName}</p>
-//             <p>Comment: {comment.comment}</p>
+//     <section className="vh-100" style={{ backgroundColor: '#eee' }}>
+//       <div className="container py-5" style={{ maxWidth: '1000px' }}>
+//         {errorMessage && (
+//           <div className="alert alert-danger" role="alert">
+//             {errorMessage}
 //           </div>
-//         ))}
+//         )}
+//         <div className="row justify-content-center">
+//           <div className="col-md-12 col-lg-10 col-xl-8">
+//             <div className="card">
+//               <div className="card-body">
+//                 <textarea
+//                   value={reviewText}
+//                   onChange={(e) => setReviewText(e.target.value)}
+//                   className="form-control mb-3"
+//                   rows="4"
+//                   placeholder="Write your review..."
+//                 ></textarea>
+//                 <div className="d-flex align-items-center">
+//                   <p className="me-3 mb-0">Rate:</p>
+//                   {[1, 2, 3, 4, 5].map((star) => (
+//                     <i
+//                       key={star}
+//                       className={`fas fa-star me-1 ${star <= rating ? 'text-warning' : 'text-muted'}`}
+//                       style={{ cursor: 'pointer' }}
+//                       onClick={() => setRating(star)}
+//                     ></i>
+//                   ))}
+//                 </div>
+//                 <button onClick={handleSubmit} className="btn btn-primary mt-3">Submit Review</button>
+//               </div>
+//             </div>
+//             {submittedReview && (
+//               <div className="card mt-4">
+//                 <div className="card-body">
+//                   <p className="mb-2">{submittedReview.text}</p>
+//                   <div className="d-flex align-items-center">
+//                     <p className="me-3 mb-0">Rating:</p>
+//                     {[1, 2, 3, 4, 5].map((star) => (
+//                       <i
+//                         key={star}
+//                         className={`fas fa-star me-1 ${star <= submittedReview.rate ? 'text-warning' : 'text-muted'}`}
+//                       ></i>
+//                     ))}
+//                   </div>
+//                 </div>
+//               </div>
+//             )}
+//           </div>
+//         </div>
 //       </div>
-//     </div>
+//     </section>
+//   );
+// }
+// import React, { useState } from 'react';
+// import axios from 'axios';
+// import { useParams } from 'react-router-dom';
+// // import React, { useState } from 'react';
+// export default function Comment() {
+//   const [reviewText, setReviewText] = useState('');
+//   const [rating, setRating] = useState(0);
+//   const [submittedReview, setSubmittedReview] = useState(null);
+//   const [errorMessage, setErrorMessage] = useState('');
+//   const { id } = useParams(); // Get id from URL
+
+//   const handleSubmit = async () => {
+//     try {
+//       const token = localStorage.getItem("token");
+//       if (!token) {
+//         console.error("Token not found");
+//         return;
+//       }
+
+//       const response = await axios.post(
+//         `https://bookify-new.onrender.com/api/v1/review`,
+//         {
+//           text: reviewText,
+//           book: id,
+//           rate: rating,
+//         },
+//         {
+//           headers: {
+//             token: token,
+//           },
+//         }
+//       );
+//       setSubmittedReview(response.data.review);
+//       setErrorMessage(''); // Clear error message if review is successfully submitted
+//     } catch (error) {
+//       console.error('Error adding review:', error);
+//       if (error.response && error.response.data && error.response.data.error) {
+//         setErrorMessage(error.response.data.error);
+//       } else {
+//         setErrorMessage('An unexpected error occurred.');
+//       }
+//     }
+//   };
+
+//   const handleDelete = async () => {
+//     try {
+//       const token = localStorage.getItem("token");
+//       if (!token) {
+//         console.error("Token not found");
+//         return;
+//       }
+
+//       await axios.delete(
+//         `https://bookify-new.onrender.com/api/v1/review/${submittedReview._id}`,
+//         {
+//           headers: {
+//             token: token,
+//           },
+//         }
+//       );
+//       setSubmittedReview(null);
+//       setErrorMessage(''); // Clear error message if review is successfully deleted
+//     } catch (error) {
+//       console.error('Error deleting review:', error);
+//       if (error.response && error.response.data && error.response.data.error) {
+//         setErrorMessage(error.response.data.error);
+//       } else {
+//         setErrorMessage('An unexpected error occurred.');
+//       }
+//     }
+//   };
+
+//   const handleUpdate = async () => {
+//     try {
+//       const token = localStorage.getItem("token");
+//       if (!token) {
+//         console.error("Token not found");
+//         return;
+//       }
+
+//       const response = await axios.put(
+//         `https://bookify-new.onrender.com/api/v1/review/${submittedReview._id}`,
+//         {
+//           text: reviewText,
+//           rate: rating,
+//         },
+//         {
+//           headers: {
+//             token: token,
+//           },
+//         }
+//       );
+//       setSubmittedReview(response.data.review);
+//       setErrorMessage(''); // Clear error message if review is successfully updated
+//     } catch (error) {
+//       console.error('Error updating review:', error);
+//       if (error.response && error.response.data && error.response.data.error) {
+//         setErrorMessage(error.response.data.error);
+//       } else {
+//         setErrorMessage('An unexpected error occurred.');
+//       }
+//     }
+//   };
+
+//   return (
+//     <section className="vh-100" style={{ backgroundColor: '#eee' }}>
+//       <div className="container py-5" style={{ maxWidth: '1000px' }}>
+//         {errorMessage && (
+//           <div className="alert alert-danger" role="alert">
+//             {errorMessage}
+//           </div>
+//         )}
+//         <div className="row justify-content-center">
+//           <div className="col-md-12 col-lg-10 col-xl-8">
+//             <div className="card">
+//               <div className="card-body">
+//                 <textarea
+//                   value={reviewText}
+//                   onChange={(e) => setReviewText(e.target.value)}
+//                   className="form-control mb-3"
+//                   rows="4"
+//                   placeholder="Write your review..."
+//                 ></textarea>
+//                 <div className="d-flex align-items-center">
+//                   <p className="me-3 mb-0">Rate:</p>
+//                   {[1, 2, 3, 4, 5].map((star) => (
+//                     <i
+//                       key={star}
+//                       className={`fas fa-star me-1 ${star <= rating ? 'text-warning' : 'text-muted'}`}
+//                       style={{ cursor: 'pointer' }}
+//                       onClick={() => setRating(star)}
+//                     ></i>
+//                   ))}
+//                 </div>
+//                 <button onClick={handleSubmit} className="btn btn-primary mt-3">Submit Review</button>
+//               </div>
+//             </div>
+//             {submittedReview && (
+//               <div className="card mt-4">
+//                 <div className="card-body">
+//                   <p className="mb-2">{submittedReview.text}</p>
+//                   <div className="d-flex align-items-center">
+//                     <p className="me-3 mb-0">Rating:</p>
+//                     {[1, 2, 3, 4, 5].map((star) => (
+//                       <i
+//                         key={star}
+//                         className={`fas fa-star me-1 ${star <= submittedReview.rate ? 'text-warning' : 'text-muted'}`}
+//                       ></i>
+//                     ))}
+//                   </div>
+//                   <button onClick={handleDelete} className="btn btn-danger mt-3 me-2">Delete Review</button>
+//                   <button onClick={handleUpdate} className="btn btn-warning mt-3">Update Review</button>
+//                 </div>
+//               </div>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//     </section>
 //   );
 // }
 
-// export default Comment;
-
-
-import React from "react";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
 
 export default function Comment() {
+  const [reviewText, setReviewText] = useState('');
+  const [rating, setRating] = useState(0);
+  const [submittedReviews, setSubmittedReviews] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
+  const { id } = useParams(); // Get book id from URL
+  const navigate = useNavigate(); // Get navigate function from react-router-dom
+
+  const handleSubmit = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        console.error("Token not found");
+        return;
+      }
+
+      const response = await axios.post(
+        `https://bookify-new.onrender.com/api/v1/review`,
+        {
+          text: reviewText,
+          book: id,
+          rate: rating,
+        },
+        {
+          headers: {
+            token: token,
+          },
+        }
+      );
+
+      setSubmittedReviews([...submittedReviews, response.data.review]);
+      localStorage.setItem("reviewId", response.data.review._id); // Store review ID in local storage
+      setReviewText('');
+      setRating(0);
+      setErrorMessage(''); // Clear error message if review is successfully submitted
+      navigate(`/books/${id}`); // Navigate back to the Book page
+    } catch (error) {
+      console.error('Error adding review:', error);
+      if (error.response && error.response.data && error.response.data.error) {
+        setErrorMessage(error.response.data.error);
+      } else {
+        setErrorMessage('An unexpected error occurred.');
+      }
+    }
+  };
+
   return (
-    <section className="vh-100" style={{ backgroundColor: "#eee" }}>
-      <div className="container py-5" style={{ maxWidth: "1000px" }}>
+    <section className="vh-100" style={{ backgroundColor: '#eee' }}>
+      <div className="container py-5" style={{ maxWidth: '1000px' }}>
+        {errorMessage && (
+          <div className="alert alert-danger" role="alert">
+            {errorMessage}
+          </div>
+        )}
         <div className="row justify-content-center">
           <div className="col-md-12 col-lg-10 col-xl-8">
             <div className="card">
               <div className="card-body">
-                <div className="d-flex flex-start align-items-center">
-                  <img
-                    className="rounded-circle shadow-1-strong me-3"
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"
-                    alt="avatar"
-                    width="60"
-                    height="60"
-                  />
-                  <div>
-                    <h6 className="fw-bold text-primary mb-1">Lily Coleman</h6>
-                    <p className="text-muted small mb-0">
-                      Shared publicly - Jan 2020
-                    </p>
-                  </div>
+                <textarea
+                  value={reviewText}
+                  onChange={(e) => setReviewText(e.target.value)}
+                  className="form-control mb-3"
+                  rows="4"
+                  placeholder="Write your review..."
+                ></textarea>
+                <div className="d-flex align-items-center">
+                  <p className="me-3 mb-0">Rate:</p>
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <i
+                      key={star}
+                      className={`fas fa-star me-1 ${star <= rating ? 'text-warning' : 'text-muted'}`}
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => setRating(star)}
+                    ></i>
+                  ))}
                 </div>
-
-                <p className="mt-3 mb-4 pb-2">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip consequat.
-                </p>
-
-                <div className="small d-flex justify-content-start">
-                  <a href="#!" className="d-flex align-items-center me-3">
-                    <i className="far fa-thumbs-up me-2"></i>
-                    <p className="mb-0">Like</p>
-                  </a>
-                  <a href="#!" className="d-flex align-items-center me-3">
-                    <i className="far fa-comment-dots me-2"></i>
-                    <p className="mb-0">Comment</p>
-                  </a>
-                  <a href="#!" className="d-flex align-items-center me-3">
-                    <i className="fas fa-share me-2"></i>
-                    <p className="mb-0">Share</p>
-                  </a>
-                </div>
-              </div>
-
-              <div className="card-footer py-3 border-0" style={{ backgroundColor: "#f8f9fa" }}>
-                <div className="d-flex flex-start w-100">
-                  <img
-                    className="rounded-circle shadow-1-strong me-3"
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"
-                    alt="avatar"
-                    width="40"
-                    height="40"
-                  />
-                  <textarea className="form-control w-100" rows="4" style={{backgroundColor: '#fff'}}></textarea>
-                </div>
-                <div className="float-end mt-2 pt-1">
-                  <button className="btn btn-sm me-1">Post comment</button>
-                  <button className="btn btn-outline-secondary btn-sm">Cancel</button>
-                </div>
+                <button onClick={handleSubmit} className="btn btn-primary mt-3">Submit Review</button>
               </div>
             </div>
           </div>
@@ -140,4 +348,3 @@ export default function Comment() {
     </section>
   );
 }
-
