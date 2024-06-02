@@ -108,27 +108,27 @@ export default function Navbar({test}) {
                             <ul className="dropdown-menu">
                                 {/* Dropdown content */}
                                 <h3 className=" d-flex justify-content-between w-75 mx-auto  h3 ">Genres</h3>
-              <li><a className="dropdown-item" href="#">Action & Adventure</a></li>
+              {/* <li><a className="dropdown-item" href="#">Action & Adventure</a></li>
               <li><a className="dropdown-item" href="#">Bios & History </a></li>
               <li><a className="dropdown-item" href="#"> Children's</a></li>
-              <li><a className="dropdown-item" href="#">Fantasy </a></li>
+              <li><a className="dropdown-item" href="#">Fantasy </a></li> */}
               <li><a className="dropdown-item" href="#">Historical Fiction </a></li>
-              <li><a className="dropdown-item" href="#"> Horror</a></li>
+              {/* <li><a className="dropdown-item" href="#"> Horror</a></li>
 
               <li><a className="dropdown-item" href="#">Literary Fiction </a></li>
               <li><a className="dropdown-item" href="#">Mystery & Thriller </a></li>
               <li><a className="dropdown-item" href="#">Non-Fiction </a></li>
               <Link className="dropdown-item" to="/Romance">Romance</Link>
               <li><a className="dropdown-item" href="#">Science Fiction </a></li>
-              <li><a className="dropdown-item" href="#">Young Adult </a></li>
+              <li><a className="dropdown-item" href="#">Young Adult </a></li> */}
               <li><hr className="dropdown-divider" /></li>
               <h3 className=" d-flex justify-content-between w-75 mx-auto  h3 ">Resources</h3>
             <Link to='/Authors'><a className="dropdown-item blackText" href="#">Authors</a></Link>
-              <li><a className="dropdown-item blackText" href="#">Languages</a></li>
-              <Link to='/Category'>   <a className="dropdown-item blackText" href="#">Genres</a></Link>
+              {/* <li><a className="dropdown-item blackText" href="#">Languages</a></li> */}
+              <Link to='/Geners'>   <a className="dropdown-item blackText" href="#">Genres</a></Link>
               <Link to='/profilePage'><a className="dropdown-item blackText" href="#">Profile</a></Link>
-              <li><a className="dropdown-item blackText" href="#">Author Interviews</a></li>
-              <li><a className="dropdown-item blackText" href="#">Discuss</a></li>
+              {/* <li><a className="dropdown-item blackText" href="#">Author Interviews</a></li>
+              <li><a className="dropdown-item blackText" href="#">Discuss</a></li> */}
                             </ul>
                         </li>
                     </ul>

@@ -1,56 +1,76 @@
-
-import { useNavigate, useParams } from 'react-router-dom'; // Import useParams from react-router-dom
 import axios from 'axios';
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 
-export default function History() {
-    let [genre, setGenre] = useState([]);
-    let [loading, setLoading] = useState(false);
-    const { id } = useParams(); // Destructure id from useParams
-    async function getGenre() {
-      setLoading(true);
-      try {
-        const response = await axios.get(`https://bookify-new.onrender.com/api/v1/genre/${id}/book`);
-        console.log('Response data:', response.data);
-        setGenre(response.data.genre);
-      } catch (error) {
-        console.error('Error fetching genre:', error);
-      } finally {
-        setLoading(false);
-      }
+export default function Genre() {
+    const [books, setBooks] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    async function getBooksForGenre() {
+        const genreId = localStorage.getItem('genreId');
+        if (!genreId) {
+            setErrorMessage('Genre ID not found in local storage.');
+            return;
+        }
+
+        setLoading(true);
+        try {
+            const response = await axios.get(`https://bookify-new.onrender.com/api/v1/genre/66325bf10a0c1485413a6f58/book`);
+            console.log('Response data:', response.data);
+            setBooks(response.data.books);
+        } catch (error) {
+            console.error('Error fetching books for genre:', error);
+        } finally {
+            setLoading(false);
+        }
     }
-  
+
     useEffect(() => {
-      getGenre();
+        getBooksForGenre();
     }, []);
-  
-  
+
+    const truncateText = (text, length) => {
+        if (text.length <= length) return text;
+        return text.substring(0, length) + '...';
+    };
+
     return (
-      <div className='container'>
-              <div className='row align-items-center'>
-                  <div className='col-md-4'>
-                      <h1 className='my-3'>Featured Genres</h1>
-                      <div className='books p-3'>
-                          {loading ? (
-                              <h1 className='text-center my-2'>Loading...</h1>
-                          ) : (
-                              genre && <img src={genre.image} className='w-100' alt='' />
-                          )}
-                      </div>
-                  </div>
-                  <div className='col-md-8'>
-                      {loading ? (
-                          <h1 className='text-center my-2'>Loading...</h1>
-                      ) : (
-                          genre && (
-                              <div>
-                                  <p>{genre.name}</p>
-                                  <p>{genre.slug}</p>
-                              </div>
-                          )
-                      )}
-                  </div>
-              </div>
-          </div>
-    )
-  }
+        <section style={{ backgroundColor: '#eee' }}>
+            <div className="container py-5">
+                <div className="row">
+                    {loading ? (
+                        <h1 className='text-center my-2'>Loading...</h1>
+                    ) : (
+                        books.map(book => (
+                            <div key={book.id} className="col-lg-3 col-md-6 mb-4">
+                                <div className="card h-100">
+                                    <div className="card-body text-center">
+                                        <img
+                                            src={book.imgCover}
+                                            alt={book.title}
+                                            className="w-100 mb-3"
+                                            style={{ height: '200px', objectFit: 'cover' }}
+                                        />
+                                        <h5 className="card-title">{truncateText(book.title, 20)}</h5>
+                                        <p className="card-text">{truncateText(book.description, 100)}</p>
+                                        <a 
+                                            href={book.bookContent} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="card-body d-flex align-items-center justify-content-center"
+                                        >
+                                            <i className="fa-solid fa-globe mr-4 rating-color" ></i> Visit website
+                                        </a>
+                                        <div className='product-box d-flex justify-content-between align-items-center mt-auto'>
+                                            <span>{book.rateCount} <i className='fa-solid fa-star rating-color'></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </div>
+            </div>
+        </section>
+    );
+}

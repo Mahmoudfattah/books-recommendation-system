@@ -70,6 +70,9 @@ import Genre from './Components/Genre';
 import Action from './Components/Action';
 import Mystery from './Components/Mystery';
 import History from './Components/History';
+import ChangePass from './Components/changePass';
+import UpdateInfo from './Components/UpdateInfo';
+import Geners from './Components/Geners';
 
 export default function App() {
 
@@ -89,12 +92,15 @@ export default function App() {
         { path: 'home', element: <ProtectedRoute><Home></Home></ProtectedRoute> },
         { path: 'login', element: <LogIn fixed='fixed-bottom'></LogIn> },
         { path: 'register', element: <Register></Register> },
+        { path: 'ChangePass', element: <ChangePass></ChangePass> },
+        { path: 'UpdateInfo', element: <UpdateInfo></UpdateInfo> },
+        { path: 'Geners', element: <Geners></Geners> },
         { path: 'ForgotPassword', element: < ForgotPassword></ForgotPassword> },
         { path: 'books/:id', element: < Books></Books> },
         { path: 'History', element: < History></History> },
         { path: 'Mystery', element: < Mystery></Mystery> },
         { path: 'Action', element: < Action></Action> },
-         { path: 'Genre/:genreId', element: < Genre></Genre> },
+         { path: 'Genre/:id', element: < Genre></Genre> },
         { path: 'AllGenre', element: < AllGenre></AllGenre> },
         {path :'Romance', element:<Romance></Romance> },
         {path :'Comment/:id', element:<Comment></Comment> },
