@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import image4 from '../assets/images/4.jpg';
+import { InfinitySpin } from 'react-loader-spinner';
 
 export default function FeaturedBooks() {
   const [booksArr, setBooksArr] = useState([]);
@@ -41,7 +42,15 @@ export default function FeaturedBooks() {
     <h1 className='my-3 text-center'>Featured Books</h1>
     <div className='row justify-content-center'>
       {loading ? (
-        <h1 className='text-center my-2'>Loading...</h1>
+        <div className='text-center my-5'>
+    <InfinitySpin
+      visible={true}
+      width="200"
+      color="#4fa94d"
+      ariaLabel="infinity-spin-loading"
+    />
+  </div>
+       
       ) : (
         currentBooks.map((books) => (
           <div key={books.id} className='col-md-3 mb-3'>

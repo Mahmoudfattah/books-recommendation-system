@@ -1,19 +1,25 @@
-// import React, { useState } from 'react';
+// import React, { useState, useEffect } from 'react';
+// import { useLocation, useNavigate } from 'react-router-dom';
 // import axios from 'axios';
 
-// const ProfilePage = () => {
+// export default function ProfilePage() {
+//   const { state } = useLocation();
+//   const token = state?.token;
+//   const navigate = useNavigate();
 //   const [user, setUser] = useState({
-//     name: '',
-//     email: '',
-//     age: '',
+//     name: 'Mahmoud Fattah',
+//     email: 'example@example.com',
+//     age: 30,
 //     userImage: null,
 //   });
 //   const [loading, setLoading] = useState(false);
 
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setUser({ ...user, [name]: value });
-//   };
+//   useEffect(() => {
+//     const token = localStorage.getItem('token');
+//     if (!token) {
+//       navigate('/LogIn');
+//     }
+//   }, [navigate]);
 
 //   const handleImageChange = (e) => {
 //     setUser({ ...user, userImage: e.target.files[0] });
@@ -24,17 +30,18 @@
 //     try {
 //       const formData = new FormData();
 //       formData.append('image', user.userImage);
-//       const response = await axios.post(
+//       const token = localStorage.getItem('token');
+//       const response = await axios.patch(
 //         'https://bookify-new.onrender.com/api/v1/userImage',
 //         formData,
 //         {
 //           headers: {
-//             'Content-Type': 'multipart/form-data',
+//             token,
 //           },
 //         }
 //       );
-//       console.log('Image uploaded successfully:', response.data);
-//       // You can update user data or handle success message here
+//       console.log('Image added successfully:', response.data);
+//       setUser({ ...user, userImage: response.data.userImage.image });
 //     } catch (error) {
 //       console.error('Error uploading image:', error);
 //     } finally {
@@ -45,11 +52,18 @@
 //   const handleDeleteImage = async () => {
 //     setLoading(true);
 //     try {
-//       const response = await axios.delete(
-//         'https://bookify-new.onrender.com/api/v1/userImage/deleteImage'
+//       const token = localStorage.getItem('token');
+//       const response = await axios.patch(
+//         'https://bookify-new.onrender.com/api/v1/userImage/deleteImage',
+//         null,
+//         {
+//           headers: {
+//             token,
+//           },
+//         }
 //       );
 //       console.log('Image deleted successfully:', response.data);
-//       // You can update user data or handle success message here
+//       setUser({ ...user, userImage: null });
 //     } catch (error) {
 //       console.error('Error deleting image:', error);
 //     } finally {
@@ -58,75 +72,98 @@
 //   };
 
 //   return (
-//     <div>
-//       <h1>Profile Page</h1>
-//       <div>
-//         <h2>User Information</h2>
-//         <label>Email:</label>
-//         <input
-//           type="email"
-//           name="email"
-//           value={user.email}
-//           onChange={handleInputChange}
-//         />
-//         <br />
-//         <label>Name:</label>
-//         <input
-//           type="text"
-//           name="name"
-//           value={user.name}
-//           onChange={handleInputChange}
-//         />
-//         <br />
-//         <label>Age:</label>
-//         <input
-//           type="number"
-//           name="age"
-//           value={user.age}
-//           onChange={handleInputChange}
-//         />
-//         <br />
-//         <h2>Profile Photo</h2>
-//         {user.userImage ? (
-//           <div>
-//             <img
-//               src={URL.createObjectURL(user.userImage)}
-//               alt="Profile"
-//               style={{ width: '200px', height: '200px' }}
-//             />
-//             <br />
-//             <button onClick={handleDeleteImage} disabled={loading}>
-//               {loading ? 'Deleting...' : 'Delete Image'}
-//             </button>
+//     <div className="container py-5">
+//       <div className="row">
+//         <div className="col-lg-4">
+//           <div className="profile-card mb-4">
+//             <div className="profile-card-body text-center">
+//               <img
+//                 src={user.userImage || "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"}
+//                 alt="avatar"
+//                 className="rounded-circle"
+//                 style={{ width: '200px' }}
+//               />
+//               <p className="text-white mb-1">Front End Developer</p>
+//               <p className="text-white mb-4">Any message</p>
+//               <div className="d-flex justify-content-center mb-2"></div>
+//             </div>
 //           </div>
-//         ) : (
-//           <div>
-//             <input type="file" onChange={handleImageChange} />
-//             <br />
-//             <button onClick={handleUploadImage} disabled={loading}>
-//               {loading ? 'Uploading...' : 'Upload Image'}
-//             </button>
+
+//           <div className="profile-card mb-4">
+//             <div className="profile-card-body text-center">
+//               <button
+//                 className="btn btn-primary btn-block mb-2"
+//                 style={{ width: '100%', backgroundColor: 'black', borderColor: 'white' }}
+//                 onClick={() => navigate('/ChangePass')}
+//               >
+//                 Change Password
+//               </button>
+//               <button
+//                 className="btn btn-primary btn-block"
+//                 style={{ width: '100%', backgroundColor: 'black', borderColor: 'white' }}
+//                 onClick={() => navigate('/UpdateInfo')}
+//               >
+//                 Update Info
+//               </button>
+//             </div>
 //           </div>
-//         )}
+//         </div>
+
+//         <div className="col-lg-8">
+//           <div className="profile-card mb-4">
+//             <div className="profile-card-body">
+//               <div className="row mb-3">
+//                 <div className="col-sm-3">
+//                   <p className="mb-0">Full Name</p>
+//                 </div>
+//                 <div className="col-sm-9">
+//                   <p className="text-muted">{user.name}</p>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+
+//           <div className="profile-card mb-4">
+//             <div className="profile-card-body">
+//               <div className="row mb-3">
+//                 <div className="col-sm-3">
+//                   <p className="mb-0">Profile Image</p>
+//                 </div>
+//                 <div className="col-sm-9">
+//                   <input type="file" onChange={handleImageChange} />
+//                 </div>
+//               </div>
+//               <div className="row">
+//                 <div className="col-sm-9 offset-sm-3">
+//                   <button className="btn btn-primary me-1 mb-2 w-100" onClick={handleUploadImage} disabled={loading}>
+//                     {loading ? 'Uploading...' : 'Upload Image'}
+//                   </button>
+//                   {user.userImage && (
+//                     <button className="btn btn-danger w-100" onClick={handleDeleteImage} disabled={loading}>
+//                       {loading ? 'Deleting...' : 'Delete Image'}
+//                     </button>
+//                   )}
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
 //       </div>
 //     </div>
 //   );
-// };
+// }
 
-// export default ProfilePage;
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 export default function ProfilePage() {
   const { state } = useLocation();
-  const token = state?.token;
   const navigate = useNavigate();
   const [user, setUser] = useState({
-    name: 'Mahmoud Fattah',
-    email: 'example@example.com',
-    age: 30,
+    name: '',
+    email: '',
+    age: null,
     userImage: null,
   });
   const [loading, setLoading] = useState(false);
@@ -135,7 +172,36 @@ export default function ProfilePage() {
     const token = localStorage.getItem('token');
     if (!token) {
       navigate('/LogIn');
+      return;
     }
+
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get('https://bookify-new.onrender.com/api/v1/auth/getInfo', {
+          headers: {
+            token,
+          },
+        });
+        const { userName, userEmail, userAge } = response.data;
+        setUser({
+          ...user,
+          name: userName,
+          email: userEmail,
+          age: userAge,
+        });
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+        if (error.response) {
+          console.error('Response data:', error.response.data);
+        } else if (error.request) {
+          console.error('Request data:', error.request);
+        } else {
+          console.error('Error message:', error.message);
+        }
+      }
+    };
+
+    fetchUserInfo();
   }, [navigate]);
 
   const handleImageChange = (e) => {
@@ -158,7 +224,7 @@ export default function ProfilePage() {
         }
       );
       console.log('Image added successfully:', response.data);
-      setUser({ ...user, userImage: response.data.userImage.image }); // Update to response.data.userImage.image
+      setUser({ ...user, userImage: response.data.userImage.image });
     } catch (error) {
       console.error('Error uploading image:', error);
     } finally {
@@ -180,7 +246,7 @@ export default function ProfilePage() {
         }
       );
       console.log('Image deleted successfully:', response.data);
-      setUser({ ...user, userImage: null }); // Update to remove the user image
+      setUser({ ...user, userImage: null });
     } catch (error) {
       console.error('Error deleting image:', error);
     } finally {
@@ -201,28 +267,63 @@ export default function ProfilePage() {
                 style={{ width: '200px' }}
               />
               <p className="text-white mb-1">Front End Developer</p>
-              <p className="text-white mb-4">any massage </p>
+              <p className="text-white mb-4">Any message</p>
               <div className="d-flex justify-content-center mb-2"></div>
+            </div>
+          </div>
+
+          <div className="profile-card mb-4">
+            <div className="profile-card-body text-center">
+              <button
+                className="btn btn-primary btn-block mb-2"
+                style={{ width: '100%', backgroundColor: 'black', borderColor: 'white' }}
+                onClick={() => navigate('/ChangePass')}
+              >
+                Change Password
+              </button>
+              <button
+                className="btn btn-primary btn-block"
+                style={{ width: '100%', backgroundColor: 'black', borderColor: 'white' }}
+                onClick={() => navigate('/UpdateInfo')}
+              >
+                Update Info
+              </button>
             </div>
           </div>
         </div>
 
         <div className="col-lg-8">
-          <div className="profile-card1 mb-4">
-            <div className="profile-card-body1">
+          <div className="profile-card mb-4">
+            <div className="profile-card-body">
               <div className="row mb-3">
                 <div className="col-sm-3">
-                  <p className="mb-0">Full Name</p>
+                  <h5 className="mb-0">Name :</h5>
                 </div>
                 <div className="col-sm-9">
-                  <p className="text-muted">{user.name}</p>
+                  <p className="text-white">{user.name}</p>
+                </div>
+              </div>
+              <div className="row mb-3">
+                <div className="col-sm-3">
+                  <h5 className="mb-0">Email :</h5>
+                </div>
+                <div className="col-sm-9">
+                  <p className="text-white">{user.email}</p>
+                </div>
+              </div>
+              <div className="row mb-3">
+                <div className="col-sm-3">
+                  <h5 className="mb-0">Age :</h5>
+                </div>
+                <div className="col-sm-9">
+                  <p className="text-white">{user.age}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="profile-card2 mb-4">
-            <div className="profile-card-body2">
+          <div className="profile-card mb-4">
+            <div className="profile-card-body">
               <div className="row mb-3">
                 <div className="col-sm-3">
                   <p className="mb-0">Profile Image</p>
@@ -233,11 +334,11 @@ export default function ProfilePage() {
               </div>
               <div className="row">
                 <div className="col-sm-9 offset-sm-3">
-                  <button className="btn btn-primary me-1" onClick={handleUploadImage} disabled={loading}>
+                  <button className="btn btn-primary me-1 mb-2 w-100" onClick={handleUploadImage} disabled={loading}>
                     {loading ? 'Uploading...' : 'Upload Image'}
                   </button>
                   {user.userImage && (
-                    <button className="btn btn-danger" onClick={handleDeleteImage} disabled={loading}>
+                    <button className="btn btn-danger w-100" onClick={handleDeleteImage} disabled={loading}>
                       {loading ? 'Deleting...' : 'Delete Image'}
                     </button>
                   )}
