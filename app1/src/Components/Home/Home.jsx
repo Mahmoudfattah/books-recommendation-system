@@ -86,6 +86,8 @@ import Category from '../../images/Category'
 import axios from 'axios'
 import FeaturedBooks from '../FeaturedBooks'
 import FeaturedBooks2 from '../FeatureBooks2'
+import Recbooks from '../Recbooks'
+// import Srchbook from '../Srchbook'
 
 export default function Home() {
   
@@ -94,6 +96,8 @@ export default function Home() {
     <>
    
   < CaterorySlider/>
+  {/* <Srchbook></Srchbook> */}
+  <Recbooks></Recbooks>
   <FeaturedBooks></FeaturedBooks>
   <Category/>
   <FeaturedBooks2></FeaturedBooks2>

@@ -302,6 +302,164 @@
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
 }
+.section_padding {
+    padding: 4rem 4rem;
+}
+
+.footer {
+    background: rgb(20, 9, 168);
+    background: linear-gradient(90deg, rgb(20, 9, 168) 0%, rgba(9, 116, 115, 1) 51%, rgba(0, 212, 255, 1) 91%);
+    width: 100%;
+    height: 100%;
+    padding: 2rem 0;
+}
+
+.container {
+    padding-bottom: 100px;
+    padding-left: 0; /* Remove left padding to touch the edge */
+    padding-right: 0; /* Remove right padding to touch the edge */
+}
+
+.sb_footer {
+    display: block;
+    flex-direction: column;
+    width: 100%; /* Ensure the footer takes the full width */
+}
+
+.sb_footer-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.sb_footer-links-div {
+    width: 200px;
+    margin: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    color: azure;
+    text-align: center;
+    padding: 10px; /* Add padding to the links div */
+}
+
+a {
+    color: azure;
+    text-decoration: none;
+}
+
+.socialmedia {
+    display: flex;
+    flex-direction: column; /* Changed to column */
+    align-items: center; /* Center align the icons */
+}
+
+.socialmedia a {
+    color: black; /* Make icons black */
+    font-size: 24px; /* Adjust size as needed */
+    margin: 10px 0; /* Add some space between the icons */
+}
+
+.sb_footer-links-div h4 {
+    font-size: 20px;
+    line-height: 17px;
+    margin-bottom: 0.9rem;
+    text-transform: uppercase;
+    padding: 5px 0; /* Add padding to the headings */
+}
+
+.sb_footer-links-div p {
+    font-size: 15px;
+    line-height: 15px;
+    margin-bottom: 0.2rem;
+    cursor: pointer;
+    padding: 5px 0; /* Add padding to the paragraphs */
+}
+
+.sb_footer-below {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 0.2rem;
+    width: 100%; /* Ensure the footer below takes the full width */
+}
+
+.sb_footer-below-links {
+    display: flex;
+    flex-direction: row;
+}
+
+.sb_footer-below-links p {
+    font-size: 15px;
+    line-height: 15px;
+    margin-left: 2rem;
+    color: azure;
+    font-weight: 600;
+    padding: 5px 0; /* Add padding to the below links */
+}
+
+hr {
+    color: azure !important;
+    width: 100%;
+}
+
+.sb_footer-copyright {
+    font-size: 15px;
+    line-height: 15px;
+    color: azure;
+    font-weight: 600;
+    padding: 5px 0; /* Add padding to the copyright text */
+}
+
+@media screen and (max-width: 850px) {
+    .sb_footer-heading h1 {
+        font-size: 40px;
+        line-height: 50px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .sb_footer-heading h2 {
+        font-size: 40px;
+        line-height: 50px;
+    }
+
+    .sb_footer-btn p {
+        font-size: 40px;
+        line-height: 50px;
+    }
+
+    .sb_footer-links-div {
+        margin: 3rem 0;
+    }
+
+    .sb_footer-below {
+        flex-direction: column;
+        justify-content: left;
+    }
+
+    .sb_footer-below-links {
+        flex-direction: column;
+    }
+
+    .sb_footer-below-links p {
+        margin-left: 0rem;
+        margin-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .sb_footer-heading h1 {
+        font-size: 27px;
+        line-height: 38px;
+    }
+}
+
 
 
 
@@ -324,7 +482,49 @@
 /* .slider-container {
   position: relative;
   overflow: hidden;
+}/* Add this CSS to your main stylesheet */
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
+
+.slider {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.slider-content {
+  display: flex;
+  animation: slide 60s linear infinite;
+}
+
+.slider-item {
+  display: inline-block;
+  width: 15%; /* Adjust this based on the number of items you want per view */
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.slider-item img {
+  width: 100%;
+  height: auto; /* Maintain original aspect ratio */
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+  transition: transform 0.2s ease-in-out;
+}
+
+.slider-item:hover img {
+  transform: scale(1.05);
+}
+
+.slider-item:hover ~ .slider-content {
+  animation-play-state: paused;
+}
+
 
 .slider-slide {
   width: 100%;
@@ -341,6 +541,7 @@
   margin-bottom: 20px; /* Adjust as needed */
   font-size: 24px; /* Adjust as needed */
 }
+
 
 
 

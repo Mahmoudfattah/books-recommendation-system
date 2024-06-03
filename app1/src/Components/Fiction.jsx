@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
-export default function Mystery() {
+export default function Fiction() {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -16,7 +16,7 @@ export default function Mystery() {
 
         setLoading(true);
         try {
-            const response = await axios.get(`https://bookify-new.onrender.com/api/v1/genre/6632428320391a90e3799e7a/book`);
+            const response = await axios.get(`https://bookify-new.onrender.com/api/v1/genre/663388014686c524f09842b9/book`);
             console.log('Response data:', response.data);
             setBooks(response.data.books);
         } catch (error) {

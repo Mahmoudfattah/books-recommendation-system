@@ -60,20 +60,25 @@ import Layout from './Components/Layout';
 import ForgotPassword from './Components/ForgotPassword';
 import Books from './Components/books';
 import AllGenre from './Components/Genre/AllGenre';
-import Romance from './Components/Genre/Romance';
+
 import Comment from './Components/Comment';
 import ProfilePage from './Components/ProfilePage';
 import ResetPassword from './Components/ResetPassword';
 import Authors from'./Components/Authors';
 import Author from './Components/Author';
 import Genre from './Components/Genre';
-import Action from './Components/Action';
+
 import Mystery from './Components/Mystery';
 import History from './Components/History';
+import Fantasy from './Components/Fantasy';
+import Literary from './Components/Literary';
+import Science from './Components/Science';
+import Fiction from './Components/Fiction';
 import ChangePass from './Components/changePass';
 import UpdateInfo from './Components/UpdateInfo';
 import Geners from './Components/Geners';
-
+import Srchbook from './Components/Srchbook';
+import Srchgenre from './Components/Srchgenre';
 export default function App() {
 
   let { setLogin } = useContext(UserTokenContext)
@@ -95,14 +100,20 @@ export default function App() {
         { path: 'ChangePass', element: <ChangePass></ChangePass> },
         { path: 'UpdateInfo', element: <UpdateInfo></UpdateInfo> },
         { path: 'Geners', element: <Geners></Geners> },
+        { path: 'Srchbook', element: <Srchbook></Srchbook> },
+        { path: ' Srchgenre', element: < Srchgenre></ Srchgenre> },
+        
         { path: 'ForgotPassword', element: < ForgotPassword></ForgotPassword> },
         { path: 'books/:id', element: < Books></Books> },
         { path: 'History', element: < History></History> },
         { path: 'Mystery', element: < Mystery></Mystery> },
-        { path: 'Action', element: < Action></Action> },
+        { path: 'Fiction', element: < Fiction></Fiction> },
+        { path: 'Science', element: < Science></Science> },
+        { path: 'Fantasy', element: < Fantasy></Fantasy> },
+        { path: 'Literary', element: < Literary></Literary> },
          { path: 'Genre/:id', element: < Genre></Genre> },
         { path: 'AllGenre', element: < AllGenre></AllGenre> },
-        {path :'Romance', element:<Romance></Romance> },
+        
         {path :'Comment/:id', element:<Comment></Comment> },
         {path :'ResetPassword', element:<ResetPassword></ResetPassword> },
         {path: 'Authors', element:<Authors></Authors>},

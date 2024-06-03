@@ -1,75 +1,25 @@
- 
-
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import { UserTokenContext } from '../../Context/UserTokenContext';
 import axios from 'axios';
 
-export default function Navbar({test}) {
+export default function Navbar() {
     const { isLogin, setLogin } = useContext(UserTokenContext);
     const [searchQuery, setSearchQuery] = useState('');
-    const [searchResults, setSearchResults] = useState([]); // Define searchResults state
     const navigate = useNavigate();
-  
 
-
-
-    function SignOut()
-    {
-      localStorage.removeItem('token')
-      setLogin(false)
-      navigate('/LogIn')
+    function SignOut() {
+        localStorage.removeItem('token');
+        setLogin(false);
+        navigate('/LogIn');
     }
 
+   const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/Srchbook?keyword=${searchQuery}`);
+};
 
-    const handleSearch = async (e) => {
-      e.preventDefault();
-      try {
-          const response = await axios.get(`https://bookify-new.onrender.com/api/v1/book?keyword=${searchQuery}`);
-          const books = response.data.book;
-          // Find the first book with a title matching the search query
-          const matchingBook = books.find(book => book.title.toLowerCase() === searchQuery.toLowerCase());
-          if (matchingBook) {
-              // Navigate to the book page using the book's slug
-              navigate(`/book/${matchingBook.slug}`);
-          } else {
-              // No matching book found, you can display a message or handle it as needed
-              console.log('No matching book found');
-          }
-      } catch (error) {
-          console.error('Error searching books:', error);
-      }
-  };
-  
-// import React, { useContext, useState } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
-// import logo from '../../assets/logo.svg';
-// import { UserTokenContext } from '../../Context/UserTokenContext';
-// import axios from 'axios';
-
-// export default function Navbar() {
-//     const { isLogin, setLogin } = useContext(UserTokenContext);
-//     const [searchQuery, setSearchQuery] = useState('');
-//     const [searchResults, setSearchResults] = useState([]);
-//     const [searchMessage, setSearchMessage] = useState(''); // State for search message
-//     const navigate = useNavigate();
-
-//     const handleSearch = async (e) => {
-//         e.preventDefault();
-//         try {
-//             const response = await axios.get(`https://bookify-new.onrender.com/api/v1/book?keyword=${searchQuery}`);
-//             const books = response.data.book;
-//             const matchingBook = books.find(book => book.title.toLowerCase() === searchQuery.toLowerCase());
-//             if (matchingBook) {
-//                 navigate(`/book/${matchingBook.slug}`);
-//             } else {
-//                 setSearchMessage('No matching book found'); // Update search message state
-//             }
-//         } catch (error) {
-//             console.error('Error searching books:', error);
-//         }
-//     };
 
     return (
         <nav className="navbar navbar-expand-lg blueNavbar">
@@ -78,7 +28,6 @@ export default function Navbar({test}) {
                     <img src={logo} alt="logo" />
                 </Link>
 
-                
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -106,29 +55,18 @@ export default function Navbar({test}) {
                                 DISCOVER
                             </a>
                             <ul className="dropdown-menu">
-                                {/* Dropdown content */}
-                                <h3 className=" d-flex justify-content-between w-75 mx-auto  h3 ">Genres</h3>
-              {/* <li><a className="dropdown-item" href="#">Action & Adventure</a></li>
-              <li><a className="dropdown-item" href="#">Bios & History </a></li>
-              <li><a className="dropdown-item" href="#"> Children's</a></li>
-              <li><a className="dropdown-item" href="#">Fantasy </a></li> */}
-              <li><a className="dropdown-item" href="#">Historical Fiction </a></li>
-              {/* <li><a className="dropdown-item" href="#"> Horror</a></li>
-
-              <li><a className="dropdown-item" href="#">Literary Fiction </a></li>
-              <li><a className="dropdown-item" href="#">Mystery & Thriller </a></li>
-              <li><a className="dropdown-item" href="#">Non-Fiction </a></li>
-              <Link className="dropdown-item" to="/Romance">Romance</Link>
-              <li><a className="dropdown-item" href="#">Science Fiction </a></li>
-              <li><a className="dropdown-item" href="#">Young Adult </a></li> */}
-              <li><hr className="dropdown-divider" /></li>
-              <h3 className=" d-flex justify-content-between w-75 mx-auto  h3 ">Resources</h3>
-            <Link to='/Authors'><a className="dropdown-item blackText" href="#">Authors</a></Link>
-              {/* <li><a className="dropdown-item blackText" href="#">Languages</a></li> */}
-              <Link to='/Geners'>   <a className="dropdown-item blackText" href="#">Genres</a></Link>
-              <Link to='/profilePage'><a className="dropdown-item blackText" href="#">Profile</a></Link>
-              {/* <li><a className="dropdown-item blackText" href="#">Author Interviews</a></li>
-              <li><a className="dropdown-item blackText" href="#">Discuss</a></li> */}
+                                <h3 className=" d-flex justify-content-between w-75 mx-auto h3">Genres</h3>
+                                <Link to='/History'><li><a className="dropdown-item" href="#">Bios & History </a></li></Link>
+                                <Link to='/Fantasy'><li><a className="dropdown-item" href="#">Fantasy </a></li></Link>
+                                <Link to='/Literary'><li><a className="dropdown-item" href="#">Literary Fiction </a></li></Link>
+                                <Link to='/Mystery'><li><a className="dropdown-item" href="#">Mystery & Thriller </a></li></Link>
+                                <Link to='/Fiction'><li><a className="dropdown-item" href="#">Fiction </a></li></Link>
+                                <Link to='/Science'><li><a className="dropdown-item" href="#">Science Fiction </a></li></Link>
+                                <li><hr className="dropdown-divider" /></li>
+                                <h3 className=" d-flex justify-content-between w-75 mx-auto h3">Resources</h3>
+                                <Link to='/Authors'><a className="dropdown-item blackText" href="#">Authors</a></Link>
+                                <Link to='/Geners'><a className="dropdown-item blackText" href="#">Genres</a></Link>
+                                <Link to='/profilePage'><a className="dropdown-item blackText" href="#">Profile</a></Link>
                             </ul>
                         </li>
                     </ul>
@@ -143,123 +81,28 @@ export default function Navbar({test}) {
                         />
                         <button className="btn original-button" type="submit">Search</button>
                     </form>
-
-                     {/* <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form className="d-flex" onSubmit={handleSearch}>
-                        <input
-                            className="form-control me-2"
-                            type="search"
-                            placeholder="Search by title, author or keywords"
-                            aria-label="Search"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            style={{ borderColor: searchMessage ? 'red' : '' }} // Add red border if search message exists
-                        />
-                        <button className="btn original-button" type="submit">Search</button>
-                    </form>
-                    {searchMessage && (
-                        <span style={{ color: 'red' }}>{searchMessage}</span>
-                    )}
-                </div> */}
                     <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
-                        {searchResults.map(book => ( // Render search results
-                            <li key={book._id} className="nav-item">
-                                <Link className="nav-link" to={`/book/${book.slug}`}>{book.title}</Link>
-                            </li>
-                        ))}
-                     
-            <li className="nav-item d-flex align-items-center">
-              <a href=""><i className='fa-brands fa-facebook mx-2'></i></a>
-              <a href=""><i className='fa-brands fa-google mx-2'></i></a>
-              <a href=""><i className='fa-brands fa-youtube mx-2'></i></a>
-            </li>
-            
-            {
-              isLogin ? <li className="nav-item">
-                <span className="nav-link cursor-pointer" onClick={SignOut}>SignOut</span>
-              </li> :
-                <>
-                  <li className="nav-item">
-                    <Link className="nav-link" to='/Register'>Register</Link>
-                  </li>
-
-                  <li className="nav-item">
-                    <Link className="nav-link" to='/LogIn'>Login</Link>
-                  </li>
-                </>
-            }
-
+                        <li className="nav-item d-flex align-items-center">
+                            <a href=""><i className='fa-brands fa-facebook mx-2'></i></a>
+                            <a href=""><i className='fa-brands fa-google mx-2'></i></a>
+                            <a href=""><i className='fa-brands fa-youtube mx-2'></i></a>
+                        </li>
+                        {
+                            isLogin ? <li className="nav-item">
+                                <span className="nav-link cursor-pointer" onClick={SignOut}>SignOut</span>
+                            </li> :
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to='/Register'>Register</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to='/LogIn'>Login</Link>
+                                </li>
+                            </>
+                        }
                     </ul>
                 </div>
             </div>
         </nav>
     );
 }
-
-
-//comment to another form
-
-// <div className="container">
-//         <Link className="navbar-brand" to='/'>
-//           <img src={logo} alt="logo" />
-//           <span>{counter}</span>
-//         </Link>
-//         <button className="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-//           aria-expanded="false" aria-label="Toggle navigation">
-//           <span className="navbar-toggler-icon"></span>
-//         </button>
-//         <div className="collapse navbar-collapse" id="collapsibleNavId">
-//           <ul className="navbar-nav me-auto mt-2 mt-lg-0">
-
-//             <li className="nav-item">
-//               <Link className="nav-link" to='/'>Home</Link>
-//             </li>
-
-//             <li className="nav-item">
-//               <Link className="nav-link" to='/products'>Products</Link>
-//             </li>
-
-//            {isLogin?  <li className="nav-item">
-//               <Link className="nav-link" to='/cart'>Cart</Link>
-//             </li>:''}
-
-//             <li className="nav-item">
-//               <Link className="nav-link" to='/brands'>Brands</Link>
-//             </li>
-
-//             <li className="nav-item">
-//               <Link className="nav-link" to='/categories'>Categories</Link>
-//             </li>
-
-//           </ul>
-//
-
-//         </div>
-//       </div>
-//     </nav>
-
-//   )
-// }
-{/* <form className="d-flex justify-content-between w-50 mx-auto" role="search"> */}
-          {/* Your search form */}
-
-          {/* <input
-              className="form-control me-2 "
-              type="search"
-              placeholder="Search by title, author or keywords"
-              aria-label="Search"
-            />
-            <button className="btn original-button " type="submit">
-              Search
-            </button>
-          </form> */}
-             {/* {isLogin ? (
-              <li className="nav-item">
-                <Link className="nav-link active whiteText" to="/">
-                  Cart
-                </Link>
-              </li>
-            ) : (
-              ''
-            )}
-           */}
