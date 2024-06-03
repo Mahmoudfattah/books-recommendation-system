@@ -70,10 +70,6 @@ import Genre from './Components/Genre';
 
 import Mystery from './Components/Mystery';
 import History from './Components/History';
-import Fantasy from './Components/Fantasy';
-import Literary from './Components/Literary';
-import Science from './Components/Science';
-import Fiction from './Components/Fiction';
 import ChangePass from './Components/changePass';
 import UpdateInfo from './Components/UpdateInfo';
 import Geners from './Components/Geners';
@@ -118,6 +114,12 @@ export default function App() {
         {path :'ResetPassword', element:<ResetPassword></ResetPassword> },
         {path: 'Authors', element:<Authors></Authors>},
         {path: 'Author/:id', element:<Author></Author>},
+        {path: 'AddToWishlist', element:<AddToWishlist></AddToWishlist>},
+        //{path: 'RemoveFromWishlist', element:<RemoveFromWishlist></RemoveFromWishlist>},
+        {path: 'LanguageList', element:<LanguageList></LanguageList>},
+        {path: 'Wishlist', element:<Wishlist></Wishlist>},
+        {path: 'book-by-lang/:id', element:<BookByLang></BookByLang>},
+        
          
         {path :'ProfilePage', element:<ProfilePage></ProfilePage> },
         //  {path:'Reviews',element:<Reviews></Reviews>},
