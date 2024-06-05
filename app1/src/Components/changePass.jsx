@@ -54,7 +54,7 @@ export default function ChangePass() {
       if (response.data.message === 'Password changed successfully') {
         setError('');
         setLoading(false);
-        navigate('/ProfilePage');
+        navigate('/LogIn');
       } else {
         setError('Failed to change password. Please try again.');
         setLoading(false);

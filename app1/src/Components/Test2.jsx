@@ -72,9 +72,9 @@ export default function Test2() {
               <h2 style={styles.bookTitle}>{item.bookId.title}</h2>
               <p style={styles.bookDescription}>{item.bookId.description}</p>
               <p style={styles.bookAction}>Action: {item.action}</p>
-              <button onClick={() => removeFromHistoryList(item._id)} style={styles.deleteButton}>
+              {/* <button onClick={() => removeFromHistoryList(item._id)} style={styles.deleteButton}>
                 Remove From History
-              </button>
+              </button> */}
             </li>
           ))}
         </ul>
