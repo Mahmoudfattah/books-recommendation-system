@@ -483,64 +483,6 @@ hr {
   position: relative;
   overflow: hidden;
 }/* Add this CSS to your main stylesheet */
-@keyframes slide {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.slider {
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-}
-
-.slider-content {
-  display: flex;
-  animation: slide 60s linear infinite;
-}
-
-.slider-item {
-  display: inline-block;
-  width: 15%; /* Adjust this based on the number of items you want per view */
-  box-sizing: border-box;
-  padding: 10px;
-}
-
-.slider-item img {
-  width: 100%;
-  height: auto; /* Maintain original aspect ratio */
-  object-fit: cover; /* Ensure the image covers the area without distortion */
-  transition: transform 0.2s ease-in-out;
-}
-
-.slider-item:hover img {
-  transform: scale(1.05);
-}
-
-.slider-item:hover ~ .slider-content {
-  animation-play-state: paused;
-}
-
-
-.slider-slide {
-  width: 100%;
-  height: 100%;
-}
-
-.slider-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
-.category-title {
-  text-align: center;
-  margin-bottom: 20px; /* Adjust as needed */
-  font-size: 24px; /* Adjust as needed */
-}
 
 
 
@@ -593,55 +535,187 @@ element.style {
 .mn-field-slider .paragraph--type--main-slide {
     padding: 0 15px;
 }
+.wishlist-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-/* CSS */
+.wishlist-header {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 2em;
+}
 
+.wishlist-message {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #28a745;
+}
 
-/* #book-search-form {
+.wishlist-loading {
+  text-align: center;
+  color: #888;
+  font-size: 1.5em;
+}
+
+.wishlist-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.wishlist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.wishlist-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.wishlist-img {
+  width: 50px;
+  height: 75px;
+  margin-right: 15px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.wishlist-title {
+  font-size: 1.2em;
+  color: #3498db;
+}
+
+.wishlist-button {
+  padding: 10px 15px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.wishlist-button:hover {
+  background-color: #c0392b;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.slider {
+  overflow: hidden;
+  white-space: nowrap;
   position: relative;
 }
-* { */
-  /* -webkit-box-sizing: border-box; */
-  /* box-sizing: border-box;
-} */
-/* form {
-  display: block;
-  margin-top: 0em;
+
+.slider-content {
+  display: flex;
+  animation: slide 60s linear infinite;
 }
-#book-search-form .form-item-search {
-  margin-bottom: 0;
+
+.slider-item {
+  display: inline-block;
+  width: 15%; /* Adjust this based on the number of items you want per view */
+  box-sizing: border-box;
+  padding: 10px;
+  flex: 0 0 auto; /* Prevents items from shrinking or growing */
+  margin: 0 10px; /* Adds spacing between items */
 }
-.form-group {
-  margin-bottom: 15px;
+
+.slider-item img {
+  width: 150px;  /* Set the desired width */
+  height: 200px; /* Set the desired height */
+  object-fit: cover; /* Ensure the image fits within the specified dimensions */
+  border-radius: 8px; /* Optional: Add rounded corners for a nicer look */
+  transition: transform 0.2s ease-in-out;
 }
-#book-search-form input {
-  max-width: none;
+
+.slider-item:hover img {
+  transform: scale(1.05);
+}
+
+.slider-item:hover ~ .slider-content {
+  animation-play-state: paused;
+}
+
+.slider-slide {
   width: 100%;
+  height: 100%;
 }
-#book-search-form input {
-  height: 40px;
-  padding-right: 50px;
-  padding-left: 20px;
-  max-width: 320px;
-  border-radius: 4px;
-}
-.form-control {
-  display: block;
+
+.slider-slide img {
   width: 100%;
-  height: 34px;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857;
-  color: #555;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-} */
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-title {
+  text-align: center;
+  margin-bottom: 20px; /* Adjust as needed */
+  font-size: 24px; /* Adjust as needed */
+}
+
+.books {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+.container {
+  padding: 20px 10px;
+  background-color: rgba(255, 255, 255, 0.51);
+  border-radius: 10px;
+}
+
+.title {
+  text-align: center;
+  text-decoration: underline;
+  color: #011720;
+  margin-bottom: 20px;
+}
+
+.languages-container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px 10px;
+}
+
+.language-link {
+  border: solid #e5e5e5 1px;
+  border-radius: 10px;
+  padding: 20px 10px;
+  text-align: center;
+  min-width: 100px;
+  cursor: pointer;
+  background-color: white;
+  color: #095674;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.language-link:hover {
+  background-color: rgba(9, 116, 115, 0.51);
+  color: white;
+}

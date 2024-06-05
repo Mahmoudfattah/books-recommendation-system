@@ -267,7 +267,7 @@ export default function ProfilePage() {
                 style={{ width: '200px' }}
               />
               <p className="text-white mb-1">Front End Developer</p>
-              <p className="text-white mb-4">Any message</p>
+              <p className="text-white mb-4"></p>
               <div className="d-flex justify-content-center mb-2"></div>
             </div>
           </div>

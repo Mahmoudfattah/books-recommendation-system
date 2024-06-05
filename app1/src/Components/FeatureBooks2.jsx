@@ -7,17 +7,17 @@ export default function FeaturedBooks() {
   const [booksArr, setBooksArr] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage = 8; // Number of books to display per page
+  const booksPerPage = 12; // Number of books to display per page
 
   async function getBooks() {
     setLoading(true);
     try {
       const response = await axios.get(
-        "https://bookify-new.onrender.com/api/v1/book?limit=24"
+        "https://bookify-new.onrender.com/api/v1/book?limit=4000"
       );
       console.log("Response data:", response.data);
       // Slice the array to get books from index 8 to 23
-      setBooksArr(response.data.books.slice(8, 24));
+      setBooksArr(response.data.books.slice(8, 4000));
     } catch (error) {
       console.error("Error fetching books:", error);
     } finally {
@@ -60,7 +60,7 @@ export default function FeaturedBooks() {
             <InfinitySpin
               visible={true}
               width="200"
-              color="#4fa94d"
+              color='rgba(9, 116, 115, 1)'
               ariaLabel="infinity-spin-loading"
             />
           </div>

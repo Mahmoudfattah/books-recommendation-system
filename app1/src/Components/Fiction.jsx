@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-
+import { InfinitySpin } from 'react-loader-spinner';
 export default function Fiction() {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -40,7 +40,14 @@ export default function Fiction() {
             <div className="container py-5">
                 <div className="row">
                     {loading ? (
-                        <h1 className='text-center my-2'>Loading...</h1>
+                       <div className='text-center my-5'>
+                       <InfinitySpin
+                           visible={true}
+                           width="200"
+                           color='rgba(9, 116, 115, 1)'
+                           ariaLabel="infinity-spin-loading"
+                       />
+                   </div>
                     ) : (
                         books.map(book => (
                             <div key={book.id} className="col-lg-3 col-md-6 mb-4">

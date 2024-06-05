@@ -55,75 +55,77 @@ export default function Recbooks() {
 
     return (
         <div className='container'>
-            <h1 className='my-3 text-center'>Recommended Books</h1>
-            <div className="row justify-content-center">
-                {loading ? (
-                    <div className='text-center my-5'>
-                        <InfinitySpin
-                            visible={true}
-                            width="200"
-                            color="#4fa94d"
-                            ariaLabel="infinity-spin-loading"
-                        />
-                    </div>
-                ) : (
-                    currentBooks.map((book) => (
-                        <div key={book._id} className="col-md-3 mb-3">
-                            <div className="books p-3 cursor-pointer">
-                                <Link to={"/books/" + book._id} className="books">
-                                    <img src={book.imgCover} className="w-75" alt={book.title} />
-                                </Link>
-                                <div className="col-md-8">
-                                    <p className="mb-0">
-                                        {book.title.split(" ").slice(0, 2).join(" ")}
-                                    </p>
-                                    <p className="mb-0">{book.slug}</p>
+            {loading ? (
+                <div className='text-center my-5'>
+                    <InfinitySpin
+                        visible={true}
+                        width="200"
+                        color="#4fa94d"
+                        ariaLabel="infinity-spin-loading"
+                    />
+                </div>
+            ) : (
+                <>
+                    <h1 className='my-3 text-center'></h1>
+                    <div className="row justify-content-center">
+                        {currentBooks.map((book) => (
+                            <div key={book._id} className="col-md-3 mb-3">
+                                <div className="books p-3 cursor-pointer">
                                     <Link to={"/books/" + book._id} className="books">
-                                        <button className="btn bg-main text-white mt-2">
-                                            Read Now
-                                        </button>
+                                        <img src={book.imgCover} className="w-75" alt={book.title} />
                                     </Link>
+                                    <div className="col-md-8">
+                                        <p className="mb-0">
+                                            {book.title.split(" ").slice(0, 2).join(" ")}
+                                        </p>
+                                        <p className="mb-0">{book.slug}</p>
+                                        <Link to={"/books/" + book._id} className="books">
+                                            <button className="btn bg-main text-white mt-2">
+                                                Read Now
+                                            </button>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
+                        ))}
+                    </div>
+                    <nav>
+                        <ul className="pagination justify-content-center">
+                            <li className="page-item">
+                                <button
+                                    onClick={prevPage}
+                                    className="page-link"
+                                    disabled={currentPage === 1}
+                                >
+                                    &laquo; Previous
+                                </button>
+                            </li>
+                            {[...Array(totalPages).keys()].map((number) => (
+                                <li key={number} className="page-item">
+                                    <button
+                                        onClick={() => paginate(number + 1)}
+                                        className={`page-link ${currentPage === number + 1 ? 'active' : ''}`}
+                                    >
+                                        {number + 1}
+                                    </button>
+                                </li>
+                            ))}
+                            <li className="page-item">
+                                <button
+                                    onClick={nextPage}
+                                    className="page-link"
+                                    disabled={currentPage === totalPages}
+                                >
+                                    Next &raquo;
+                                </button>
+                            </li>
+                        </ul>
+                        <div className="text-center mt-3">
+                            <button className='btn bg-main text-white' onClick={handleOkClick}>OK</button>
                         </div>
-                    ))
-                )}
-            </div>
-            <nav>
-                <ul className="pagination justify-content-center">
-                    <li className="page-item">
-                        <button
-                            onClick={prevPage}
-                            className="page-link"
-                            disabled={currentPage === 1}
-                        >
-                            &laquo; Previous
-                        </button>
-                    </li>
-                    {[...Array(totalPages).keys()].map((number) => (
-                        <li key={number} className="page-item">
-                            <button
-                                onClick={() => paginate(number + 1)}
-                                className={`page-link ${currentPage === number + 1 ? 'active' : ''}`}
-                            >
-                                {number + 1}
-                            </button>
-                        </li>
-                    ))}
-                    <li className="page-item">
-                        <button
-                            onClick={nextPage}
-                            className="page-link"
-                            disabled={currentPage === totalPages}
-                        >
-                            Next &raquo;
-                        </button>
-                    </li>
-                </ul>
-                <div className="text-center mt-3">
-                    <button className='btn bg-main text-white' onClick={handleOkClick}>OK</button>
-                </div>
-            </nav>
+                    </nav>
+                </>
+            )}
         </div>
     );
 }

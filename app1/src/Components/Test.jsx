@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { InfinitySpin } from 'react-loader-spinner';
 
-const Wishlist = () => {
+export default function Test() {
   const [wishlist, setWishlist] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
@@ -28,6 +29,7 @@ const Wishlist = () => {
       setLoading(false);
     }
   };
+
   const removeFromWishlist = async (bookId) => {
     const token = localStorage.getItem("token");
     try {
@@ -46,20 +48,27 @@ const Wishlist = () => {
   };
 
   return (
-    <div>
-      <h1>Your Wishlist</h1>
-      {message && <div>{message}</div>}
+    <div className="wishlist-container">
+      <h1 className="wishlist-header">Your Wishlist</h1>
+      {message && <div className="wishlist-message">{message}</div>}
       {loading ? (
-        <h2>Loading...</h2>
+        <div className='text-center my-5'>
+        <InfinitySpin
+            visible={true}
+            width="200"
+            color='rgba(9, 116, 115, 1)'
+            ariaLabel="infinity-spin-loading"
+        />
+    </div>
       ) : (
-        <ul>
+        <ul className="wishlist-list">
           {wishlist.map(book => (
-            <li key={book._id}>
-              <Link to={`/book/${book._id}`}>
-                <img src={book.imgCover} alt={book.title} style={{ width: '50px', height: '75px' }} />
-                <span>{book.title}</span>
+            <li key={book._id} className="wishlist-item">
+              <Link to={`/book/${book._id}`} className="wishlist-link">
+                <img src={book.imgCover} alt={book.title} className="wishlist-img" />
+                <span className="wishlist-title">{book.title}</span>
               </Link>
-              <button onClick={() => removeFromWishlist(book._id)} className="small-button" >Remove from Wishlist</button>
+              <button onClick={() => removeFromWishlist(book._id)} className="wishlist-button">Remove from Wishlist</button>
             </li>
           ))}
         </ul>
@@ -67,7 +76,3 @@ const Wishlist = () => {
     </div>
   );
 };
-
- 
-
-export default Wishlist;

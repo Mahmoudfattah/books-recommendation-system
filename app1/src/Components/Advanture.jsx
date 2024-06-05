@@ -1,8 +1,8 @@
 
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { InfinitySpin } from 'react-loader-spinner';
-export default function Mystery() {
+
+export default function Advanture() {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -16,7 +16,7 @@ export default function Mystery() {
 
         setLoading(true);
         try {
-            const response = await axios.get(`https://bookify-new.onrender.com/api/v1/genre/6632428320391a90e3799e7a/book`);
+            const response = await axios.get(`https://bookify-new.onrender.com/api/v1/genre/66358b8bc31bea8a9b9fa9e8/book`);
             console.log('Response data:', response.data);
             setBooks(response.data.books);
         } catch (error) {
@@ -40,14 +40,7 @@ export default function Mystery() {
             <div className="container py-5">
                 <div className="row">
                     {loading ? (
-                        <div className='text-center my-5'>
-                        <InfinitySpin
-                            visible={true}
-                            width="200"
-                            color='rgba(9, 116, 115, 1)'
-                            ariaLabel="infinity-spin-loading"
-                        />
-                    </div>
+                        <h1 className='text-center my-2'>Loading...</h1>
                     ) : (
                         books.map(book => (
                             <div key={book.id} className="col-lg-3 col-md-6 mb-4">

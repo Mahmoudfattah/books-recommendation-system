@@ -75,7 +75,7 @@ export default function Genres() {
                     <InfinitySpin
                         visible={true}
                         width="200"
-                        color="#4fa94d"
+                        color='rgba(9, 116, 115, 1)'
                         ariaLabel="infinity-spin-loading"
                     />
                 </div>

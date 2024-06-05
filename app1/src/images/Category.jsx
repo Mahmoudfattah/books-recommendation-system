@@ -9,7 +9,7 @@ const Category = () => {
   // Define an array of objects containing image paths and corresponding page paths
   const genres = [
     { image: image1, path: '/Romance' }, // Define path for the first image
-    { image: image2, path: '/Action' }, // Define path for the second image
+    { image: image2, path: '/Advanture' }, // Define path for the second image
     { image: image3, path: '/Mystery' }, // Define path for the third image
     { image: image4, path: '/History' }, // Define path for the fourth image
   ];

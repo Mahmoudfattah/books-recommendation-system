@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { InfinitySpin } from 'react-loader-spinner';
 export default function Books() {
   const [book, setBook] = useState({});
   const [loading, setLoading] = useState(false);
@@ -182,7 +182,15 @@ export default function Books() {
             <div className="card mb-4">
               <div className="card-body text-center">
                 {loading ? (
-                  <h1 className="text-center my-2">Loading...</h1>
+               
+                   <div className='text-center my-5'>
+            <InfinitySpin
+              visible={true}
+              width="200"
+              color='rgba(9, 116, 115, 1)'
+              ariaLabel="infinity-spin-loading"
+            />
+          </div>
                 ) : (
                   <img
                     src={book.imgCover}
@@ -200,7 +208,7 @@ export default function Books() {
                 <div>
                   <h4>{book.title}</h4>
                   <p>{book.description}</p>
-                  <p>{book.bookContent}</p>
+                  <a href={book.bookContent} target="_blank" rel="noopener noreferrer" className="fa-solid fa-globe mr-4 rating-color">Visit Website</a>
                   <p className="fw-bolder">
                     {book.author ? book.author.name : ""}
                   </p>

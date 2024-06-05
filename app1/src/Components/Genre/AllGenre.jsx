@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { InfinitySpin } from 'react-loader-spinner';
 export default function AllGenre() {
     const [genres, setGenres] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -32,7 +32,14 @@ export default function AllGenre() {
         <div className='container'>
             <h1 className='my-3'>All Genres</h1>
             {loading ? (
-                <h1 className='text-center my-2'>Loading...</h1>
+                <div className='text-center my-5'>
+                <InfinitySpin
+                    visible={true}
+                    width="200"
+                    color='rgba(9, 116, 115, 1)'
+                    ariaLabel="infinity-spin-loading"
+                />
+            </div>
             ) : (
                 <div className='row'>
                     {genres.map(genre => (
