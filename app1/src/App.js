@@ -35,7 +35,7 @@ import BookByLang from './Components/BooksByLang';
 import HistoryList from './Components/HistoryList';
 import Advanture from './Components/Advanture';
 import Romance from './Components/Genre/Romance';
-
+import Test2 from './Components/Test2';
 // import AddToWishlist from './Components/AddToWishlist';
 // import LanguageList from './Components/LanguageList';
 // import Wishlist from './Components/Wishlist'; // Adjusted path
@@ -82,8 +82,10 @@ export default function App() {
         { path: 'Advanture', element: <Advanture></Advanture> },
         { path: 'Romance', element: <Romance></Romance> },
         { path: 'Author/:id', element: <Author></Author> },
+        { path: 'Test2', element: <Test2></Test2> },
+
         
-        { path: ' HistoryList', element: < HistoryList></ HistoryList> },
+        // { path: ' HistoryList', element: < HistoryList></ HistoryList> },
         // { path: 'LanguageList', element: <LanguageList></LanguageList> },
         // { path: 'Wishlist', element: <Wishlist></Wishlist> },
         // { path: 'book-by-lang/:id', element: <BookByLang></BookByLang> },

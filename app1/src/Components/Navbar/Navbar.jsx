@@ -526,7 +526,7 @@ export default function Navbar() {
                                 <Link to='/profilePage'><a className="dropdown-item blackText" href="#">Profile</a></Link>
                                 <Link to='/Test'><a className="dropdown-item blackText" href="#">WishList</a></Link>
                                 <Link to='/AllLang'><a className="dropdown-item blackText" href="#">Languages</a></Link>
-                                <Link to='/HistoryList'><a className="dropdown-item blackText" href="#">HistoryList</a></Link>
+                                <Link to='/Test2'><a className="dropdown-item blackText" href="#">HistoryList</a></Link>
                             </ul>
                         </li>
                     </ul>
