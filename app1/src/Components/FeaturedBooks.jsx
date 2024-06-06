@@ -17,7 +17,7 @@ export default function FeaturedBooks() {
 
   return (
     <div className='container' style={{ fontFamily: 'Poetsen One' }}>
-      <h1 style={{ fontFamily: 'Poetsen One' }} className='my-3 text-center'>Featured Books</h1>
+      <h1 style={{ fontFamily: 'Poetsen One' }} className='my-3 text-center'>TRENDING BOOKS</h1>
       <div className='slider'>
         <div className='slider-content'>
           {isLoading ? (

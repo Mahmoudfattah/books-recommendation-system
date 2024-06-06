@@ -40,9 +40,9 @@ const Footer = () => {
                         <div className="sb_footer-links-div">
                             <h4>Follow</h4>
                             <div className="socialmedia">
-                                <a href=""><i className='fa-brands fa-facebook'></i></a>
-                                <a href=""><i className='fa-brands fa-instagram'></i></a>
-                                <a href=""><i className='fa-brands fa-twitter'></i></a>
+                                <a href="https://www.facebook.com/"><i className='fa-brands fa-facebook'></i></a>
+                                <a href="https://www.instagram.com/?hl=en"><i className='fa-brands fa-instagram'></i></a>
+                                <a href="https://x.com/?mx=2"><i className='fa-brands fa-twitter'></i></a>
                             </div>
                         </div>
                     </div>

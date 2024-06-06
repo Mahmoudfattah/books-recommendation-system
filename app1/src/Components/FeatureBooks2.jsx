@@ -52,7 +52,7 @@ export default function FeaturedBooks() {
 
   return (
     <div className="container">
-      <h1  style={{ fontFamily: 'Agbalumo' }} className="my-3 text-center">Featured Books</h1>
+      <h1  style={{ fontFamily: 'Agbalumo' }} className="my-3 text-center">POPULAR CLASSICS</h1>
 
       <div className="row justify-content-center">
         {loading ? (

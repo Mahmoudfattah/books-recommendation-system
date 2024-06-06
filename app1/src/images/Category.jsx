@@ -17,7 +17,7 @@ const Category = () => {
   return (
     <div className="container">
       <div className="block-header text-center">
-        <h2 style={{ fontFamily: 'Poetsen One' }} className="block-title">Browse genres</h2>
+        <h2 style={{ fontFamily: 'Poetsen One' }} className="block-title">BROWSER GENRES</h2>
         <Link to="/AllGenre">(view all)</Link>
       </div>
       <div className="row justify-content-center">
