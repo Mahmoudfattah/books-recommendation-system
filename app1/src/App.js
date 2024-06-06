@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import './App.css';
 import Home from './Components/Home/Home';
 import LogIn from './Components/LogIn/LogIn';
@@ -23,24 +24,20 @@ import ChangePass from './Components/changePass';
 import UpdateInfo from './Components/UpdateInfo';
 import Geners from './Components/Geners';
 import Srchbook from './Components/Srchbook';
-import Srchgenre from './Components/Srchgenre'; 
+import Srchgenre from './Components/Srchgenre';
 import Fiction from './Components/Fiction';
 import Science from './Components/Science';
 import Fantasy from './Components/Fantasy';
 import Literary from './Components/Literary';
 import Test from './Components/Test';
-// import BookByLang from './Components/bookByLang';
 import AllLang from './Components/AllLang';
 import BookByLang from './Components/BooksByLang';
 import HistoryList from './Components/HistoryList';
 import Advanture from './Components/Advanture';
 import Romance from './Components/Genre/Romance';
 import Test2 from './Components/Test2';
-// import AddToWishlist from './Components/AddToWishlist';
-// import LanguageList from './Components/LanguageList';
-// import Wishlist from './Components/Wishlist'; // Adjusted path
 
-// import BookByLang from './Components/BookByLang';
+const queryClient = new QueryClient();
 
 export default function App() {
   let { setLogin } = useContext(UserTokenContext);
@@ -83,14 +80,8 @@ export default function App() {
         { path: 'Romance', element: <Romance></Romance> },
         { path: 'Author/:id', element: <Author></Author> },
         { path: 'Test2', element: <Test2></Test2> },
-
-        
-        // { path: ' HistoryList', element: < HistoryList></ HistoryList> },
-        // { path: 'LanguageList', element: <LanguageList></LanguageList> },
-        // { path: 'Wishlist', element: <Wishlist></Wishlist> },
-        // { path: 'book-by-lang/:id', element: <BookByLang></BookByLang> },
-           { path: 'BookByLang/:id', element: <BookByLang></BookByLang> },
-            { path: 'AllLang', element: <AllLang></AllLang> },
+        { path: 'BookByLang/:id', element: <BookByLang></BookByLang> },
+        { path: 'AllLang', element: <AllLang></AllLang> },
         { path: 'ProfilePage', element: <ProfilePage></ProfilePage> },
         { path: '*', element: <NotFound></NotFound> },
       ]
@@ -98,6 +89,8 @@ export default function App() {
   ]);
 
   return (
-    <RouterProvider router={routes}></RouterProvider>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={routes}></RouterProvider>
+    </QueryClientProvider>
   );
 }

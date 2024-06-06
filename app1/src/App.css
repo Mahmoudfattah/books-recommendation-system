@@ -719,3 +719,29 @@ element.style {
   background-color: rgba(9, 116, 115, 0.51);
   color: white;
 }
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* .description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} */
+
+.label {
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.padded-content {
+  padding: 25px 0; /* Add padding as needed */
+}

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link, useNavigate } from 'react-router-dom';
 const Footer = () => {
     return (
         <div className="container">
@@ -8,15 +8,10 @@ const Footer = () => {
                     <div className="sb_footer-links">
                         <div className="sb_footer-links-div">
                             <h4>Library</h4>
-                            <a href="#Gernes">
-                                <p>Genres</p>
-                            </a>
-                            <a href="#Languages">
-                                <p>Languages</p>
-                            </a>
-                            <a href="#Authors">
-                                <p>Authors</p>
-                            </a>
+                            <Link to='/Geners'><a className="dropdown-item blackText" href="#">Genres</a></Link>
+                           <Link to='/AllLang'><a className="dropdown-item blackText" href="#">Languages</a></Link>
+                            
+                            <Link to='/Authors'><a className="dropdown-item blackText" href="#">Authors</a></Link>
                         </div>
                         <div className="sb_footer-links-div">
                             <h4>Community</h4>

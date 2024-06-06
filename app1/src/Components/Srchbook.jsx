@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { InfinitySpin } from 'react-loader-spinner';
 
+
 export default function Srchbook() {
     const [booksArr, setBooksArr] = useState([]);
     const [recommendedBooks, setRecommendedBooks] = useState([]);
@@ -79,7 +80,7 @@ export default function Srchbook() {
                                         <p className='mb-0'>
                                             {book.title.split(" ").slice(0, 2).join(" ")}
                                         </p>
-                                        <p className='mb-0'>{book.description}</p>
+                                        <p className='description mb-0'>{book.description}</p>
                                         <Link to={'/books/' + book.id} className='books'>
                                             <button className="btn bg-main text-white mt-2">
                                                 Read Now
@@ -103,7 +104,7 @@ export default function Srchbook() {
                                         <p className='mb-0'>
                                             {book.title.split(" ").slice(0, 2).join(" ")}
                                         </p>
-                                        <p className='mb-0'>{book.description}</p>
+                                        <p className='description mb-0'>{book.description}</p>
                                         <Link to={'/books/' + book.id} className='books'>
                                             <button className="btn bg-main text-white mt-2">
                                                 Read Now

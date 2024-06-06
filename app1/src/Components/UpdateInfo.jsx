@@ -12,12 +12,14 @@ export default function UpdateInfo() {
   let navigate = useNavigate();
 
   const validationSchema = Yup.object({
+    name: Yup.string().min(3, 'Name must be at least 3 characters').max(20, 'Name cannot exceed 20 characters').required('Name is required'),
     email: Yup.string().email('Invalid email format').required('Email is required'),
     age: Yup.number().min(1, 'Age must be at least 1').max(100, 'Age cannot exceed 100').required('Age is required'),
   });
 
   let formik = useFormik({
     initialValues: {
+      name: '',
       email: '',
       age: ''
     },
@@ -67,6 +69,16 @@ export default function UpdateInfo() {
       <form className='w-75 mx-auto my-5' onSubmit={formik.handleSubmit}>
         {error && <p className='alert alert-danger'>{error}</p>}
         <h2>Update Info</h2>
+
+
+
+        <label htmlFor='name'>Name:</label>
+        <input type='text' className='form-control mb-3' id='name' name='name' onBlur={formik.handleBlur} value={formik.values.name} onChange={formik.handleChange} />
+        {formik.errors.name && formik.touched.name && <p className='alert alert-danger'>{formik.errors.name}</p>}
+
+
+
+
 
         <label htmlFor='email'>Email:</label>
         <input type='email' className='form-control mb-3' id='email' name='email' value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />

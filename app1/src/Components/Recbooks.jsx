@@ -75,12 +75,12 @@ export default function Recbooks() {
                                         <img src={book.imgCover} className="w-75" alt={book.title} />
                                     </Link>
                                     <div className="col-md-8">
-                                        <p className="mb-0">
+                                        <p style={{ fontFamily: 'Poetsen One' }} className="mb-0">
                                             {book.title.split(" ").slice(0, 2).join(" ")}
                                         </p>
-                                        <p className="mb-0">{book.slug}</p>
+                                        <p style={{ fontFamily: 'Poetsen One' }} className="mb-0">{book.slug}</p>
                                         <Link to={"/books/" + book._id} className="books">
-                                            <button className="btn bg-main text-white mt-2">
+                                            <button  style={{ fontFamily: 'Poetsen One' }}className="btn bg-main text-white mt-2">
                                                 Read Now
                                             </button>
                                         </Link>
@@ -121,7 +121,7 @@ export default function Recbooks() {
                             </li>
                         </ul>
                         <div className="text-center mt-3">
-                            <button className='btn bg-main text-white' onClick={handleOkClick}>OK</button>
+                            {/* <button className='btn bg-main text-white' onClick={handleOkClick}>OK</button> */}
                         </div>
                     </nav>
                 </>

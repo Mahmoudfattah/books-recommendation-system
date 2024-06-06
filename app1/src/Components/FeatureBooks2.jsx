@@ -52,7 +52,7 @@ export default function FeaturedBooks() {
 
   return (
     <div className="container">
-      <h1 className="my-3 text-center">Featured Books</h1>
+      <h1  style={{ fontFamily: 'Agbalumo' }} className="my-3 text-center">Featured Books</h1>
 
       <div className="row justify-content-center">
         {loading ? (
@@ -72,12 +72,12 @@ export default function FeaturedBooks() {
                   <img src={books.imgCover} className="w-75" alt="" />
                 </Link>
                 <div className="col-md-8">
-                  <p className="mb-0">
+                  <p style={{ fontFamily: 'Poetsen One' }}  className="mb-0">
                     {books.title.split(" ").slice(0, 2).join(" ")}
                   </p>
                   <p className="mb-0">{books.slug}</p>
                   <Link to={"/books/" + books.id} className="books">
-                    <button className="btn bg-main text-white mt-2">
+                    <button   style={{ fontFamily: 'Poetsen One' }} className="btn bg-main text-white mt-2">
                       Read Now
                     </button>
                   </Link>
